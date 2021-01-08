@@ -6,7 +6,7 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(AuthReducer, {
-    user:null,
+    user:localStorage.getItem('user'),
     error:null,
     loading:false
   });

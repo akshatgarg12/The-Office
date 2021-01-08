@@ -1,0 +1,11 @@
+.red{
+  background-color: turquoise; 
+}
+
+.absent{
+  background:tomato !important;
+}
+
+.calender{
+  margin: 10px auto;
+}
