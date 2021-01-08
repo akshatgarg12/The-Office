@@ -5,6 +5,7 @@ import {UserContext} from '../../../context/UserContextProvider';
 const ProtectedRoute = ({path, component}) => {
   const router = useHistory();
   const {state} = useContext(UserContext);
+  console.log(state);
   if(!state.user || state.error){
      router.replace('/login');
      return null;

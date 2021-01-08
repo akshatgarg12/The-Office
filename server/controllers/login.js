@@ -9,6 +9,7 @@ const getToken = (_id) => {
   });
   return token
 }
+
 const loginUser = async (req,res) => {
   const {email, password} = req.body
   if(!email || !password){
@@ -38,4 +39,12 @@ const loginUser = async (req,res) => {
   }
 }
 
-module.exports = loginUser;
+const logoutUser = (req,res) => {
+    res.cookie('user', null, {maxAge:1})
+    res.send("Successfully logged out")
+}
+
+module.exports = {
+  LOGIN:loginUser,
+  LOGOUT:logoutUser
+};
