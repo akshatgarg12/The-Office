@@ -10,7 +10,7 @@ const { graphqlHTTP } = require('express-graphql');
 const DB_connection = require('./config/mongoDB');
 const cloudinary_config = require('./config/cloudinary');
 const apiRoutes = require('./routes')
-
+const cookieParser = require('cookie-parser')
 
 
 // middlewares
@@ -18,6 +18,7 @@ app.use(express.json({limit:"40mb"}))
 app.use(fileUpload());
 app.use(express.urlencoded({extended:true}));
 app.use(cors())
+app.use(cookieParser())
 app.use(helmet({
   contentSecurityPolicy:false
 }))

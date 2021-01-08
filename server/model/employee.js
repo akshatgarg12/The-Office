@@ -3,16 +3,23 @@ const mongoose = require('mongoose')
 const employeeSchema = new mongoose.Schema({
   firstName:{
     type:String,
-    required:[true, 'firstName is required']
+    required:[true, 'firstName is required'],
+    lowercase:true
   },
   lastName:{
     type:String,
-    required:[true, 'lastName is required']
+    required:[true, 'lastName is required'],
+    lowercase:true
   },
   email:{
     type:String,
     required:[true, 'email is required'],
-    unique:[true, 'email must be unique']
+    unique:[true, 'email must be unique'],
+    lowercase:true
+  },
+  password:{
+    type:String,
+    required:[true, 'password is required'],
   },
   gender:{
     type:String,
@@ -22,12 +29,17 @@ const employeeSchema = new mongoose.Schema({
   department:{
     type:String,
     required:[true, 'department is required'],
-    enum: ['Sales Department', 'Management Department', 'Marketing Department']
+    enum: ['Sales Department', 'Management Department', 'Finance Department']
   },
   position:{
     type:String,
     required:[true, 'position is required'],
     enum: ['Intern', 'Regular Employee', 'Manager']
+  },
+  branch:{
+    type:String,
+    required:[true, 'branch is required'],
+    enum: ['Scranton', 'Akron', 'Utica']
   },
   salary:{
     type:Number,

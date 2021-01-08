@@ -1,6 +1,7 @@
 import {  useState } from 'react';
 import { Form , Label, Input, Segment, Container,Message,Menu,Image} from 'semantic-ui-react'
-import {genderOptions, jobOptions, positionOptions} from './options';
+import {genderOptions, jobOptions, positionOptions, branchOptions} from './options';
+import PreviewEmployeeInfo from '../PreviewEmployeeInfo';
 import axios from 'axios';
 import './style.css';
 
@@ -11,33 +12,6 @@ const toBase64 = file => new Promise((resolve, reject) => {
   reader.onerror = error => reject(error);
 });
 
-const PreviewEmployeeInfo = ({details}) => {
- 
-  return (
-  <Segment attached='bottom' inverted className="form-container">
-    <Image src={details.img} size='medium' centered />
-      <Form inverted className="form-container">
-          <Form.Group widths='equal'>
-            <Form.Input fluid label='First name' readOnly value={details.firstName} />
-            <Form.Input fluid label='Last name'  readOnly value={details.lastName} />
-            <Form.Input fluid label='Gender' readOnly value={details.gender} />
-          </Form.Group>
-          <Form.Group widths = 'equal'>
-          <Form.Input fluid label='Department' readOnly value={details.department} />
-          <Form.Input fluid label='Department' readOnly value={details.position} />
-            </Form.Group>
-            <Form.Group widths = 'equal'>
-              <Form.Input fluid label='email' readOnly value={details.email} />
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Input label="date of birth" value={details.dob}  readOnly/>
-              <Form.Input label="salary" value={details.salary} readOnly/>
-            </Form.Group>
-          <Form.Checkbox label='is Admin' checked={details.isAdmin} />
-        </Form>
-  </Segment>
-  );
-}
  
 const ImageUploaderComponent = ({details, setDetails}) => {
   const [selectedFile, setSelectedFile]  = useState(null);
@@ -79,6 +53,7 @@ const AddEmployeeForm = () => {
       gender:"",
       department:"",
       position:"",
+      branch:"",
       salary:"",
       isAdmin:false,
       dob:"",
@@ -152,7 +127,7 @@ const AddEmployeeForm = () => {
           active={activeMenu === 'image'}
           onClick={handleMenuChange}
         />
-        
+
          <Menu.Item
           name='preview'
           active={activeMenu === 'preview'}
@@ -208,9 +183,18 @@ const AddEmployeeForm = () => {
                 </Input>
               </Form.Field>
             </Form.Group>
-
+            <Form.Group widths = 'equal'>
               <Form.Input type="date" label="date of birth" placeholder="DOB" value={details.dob} name="dob" onChange={changeHandler}/>
-  
+              <Form.Select
+                fluid
+                label='Branch'
+                options={branchOptions}
+                placeholder='Branch'
+                name="branch"
+                value={details.branch}
+                onChange = {changeHandler}
+              />
+            </Form.Group>
           <Form.Checkbox label='is Admin' name="isAdmin" 
               checked={details.isAdmin}
               onChange = {(e, {name, checked})=> setDetails({

@@ -1,4 +1,5 @@
 const Employee = require('../model/employee');
+const bcrypt = require('bcrypt')
 
 const EmployeeMethods = {
   create:async (req,res) => {
@@ -19,7 +20,10 @@ const EmployeeMethods = {
       return res.status(400).send("please fill all the fields");
     }
     try{
-      const employee = new Employee({...req.body})
+      const password = firstName+String(lastName.length);
+      const hashedPassword = await bcrypt.hash(password,8);
+      console.log(password, hashedPassword);
+      const employee = new Employee({...req.body, password:hashedPassword})
       const data = await employee.save();
       return res.status(200).send(data._id);
     }catch(e){
