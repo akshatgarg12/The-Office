@@ -1,6 +1,5 @@
 import {useState} from 'react';
-import { Button, Container,Form, TextArea, Segment } from 'semantic-ui-react';
-import MiniModal from '../modal';
+import { Button, Container,Form, TextArea } from 'semantic-ui-react';
 
 const Payroll = () => {
   const [details, setDetails] = useState({
@@ -8,7 +7,6 @@ const Payroll = () => {
   });
   return (
     <Container>
-      <Segment>
           <Form>
             <Form.Field
                 control={TextArea}
@@ -21,7 +19,6 @@ const Payroll = () => {
             <Button onClick={()=>{
                 console.log(details);
             }} className="btn-padding">Payroll Request</Button>
-      </Segment>
     </Container>
   );
 }

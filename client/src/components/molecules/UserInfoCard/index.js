@@ -3,17 +3,19 @@ import './style.css';
 
 const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName, img, position, fluid }) => {
   return (
-    <Segment>
+    <Segment textAlign='center'>
       {
         fluid &&
-        <Image src={img} wrapped ui={true} size="medium" style={{margin:"auto"}} />
+        <div>
+          <Image rounded bordered src={img} wrapped ui={true} size="medium" centered />
+        </div>
       }
     <Card fluid = {fluid}>
       { 
       !fluid &&
-      <Image src={img} wrapped ui={false} />
+      <Image src={img} wrapped ui={true} />
       }
-      <Card.Content>
+      <Card.Content className="content">
         <Card.Header><h2>{firstName} {lastName}</h2></Card.Header>
         <Card.Description>Employee_id: <span className="highlight">{_id}</span></Card.Description>
         <Card.Meta>Date of Birth: {dob.toString()}</Card.Meta>

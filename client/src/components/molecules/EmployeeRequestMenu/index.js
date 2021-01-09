@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Segment, Menu } from "semantic-ui-react";
-import Attendance from "../../atoms/Attendance";
+import LeaveRequest from "../../atoms/leave";
 import Bonus from "../../atoms/bonus";
 import Payroll from '../../atoms/payroll';
+import './style.css'
 
 const EmployeeRequestMenu = () => {
   const [activeItem, setActiveItem] = useState('leave')
   const handleItemClick = (e, { name }) => setActiveItem(name);
   return (
-    <>
+    <div className="user-request-menu">
         <Menu attached='top' tabular>
           <Menu.Item
             name='leave'
@@ -31,11 +32,11 @@ const EmployeeRequestMenu = () => {
             activeItem ==='bonus' ?
             <Bonus /> : 
             activeItem === "leave" ?
-            <Attendance absentDates = {['01/01/2021','05/01/2021','20/01/2021']} />:
+            <LeaveRequest absentDates = {['01/01/2021','05/01/2021','20/01/2021']} />:
             <Payroll />
           }
         </Segment>
-    </>
+    </div>
   );
 }
  

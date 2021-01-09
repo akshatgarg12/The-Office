@@ -18,7 +18,7 @@ const MiniModal = ({ButtonText, onConfirm}) => {
   })
   const onConfirmHandler = async () => {
     dispatch({ type: 'close' })
-    const data = await onConfirm();
+    await onConfirm();
   }
   return (
     <>

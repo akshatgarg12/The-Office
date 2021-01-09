@@ -22,6 +22,7 @@ const LoginForm = () => {
         return router.replace('/dashboard');
       }else{
         setError(state.error);
+        console.log(error);
       }
   }
 

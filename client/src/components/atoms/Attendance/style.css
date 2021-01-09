@@ -1,11 +1,6 @@
-.red{
-  background-color: turquoise; 
+.present{
+  background-color: greenyellow !important;
 }
-
 .absent{
-  background:tomato !important;
-}
-
-.calender{
-  margin: 10px auto;
+  background-color:tomato !important;
 }

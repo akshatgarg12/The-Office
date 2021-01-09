@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import CreateEmployeePage from './components/pages/createEmployee';
 import LoginPage from './components/pages/loginPage';
 import ProtectedRoute from './components/atoms/ProtectedRoute';
