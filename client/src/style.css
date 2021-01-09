@@ -2,3 +2,12 @@
   box-sizing: border-box;
   margin: 0;
 }
+
+.row-flex{
+  display:flex;
+  flex-direction: row;
+}
+.col-flex{
+  display:flex;
+  flex-direction: column;
+}

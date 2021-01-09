@@ -1,41 +1,27 @@
-import { useState } from "react";
-import { Container, Segment, Menu } from "semantic-ui-react";
-import Attendance from "../atoms/Attendance";
-import Bonus from "../atoms/bonus";
-import Payroll from "../atoms/payroll";
+import { useContext, useState } from "react";
+import { Container} from "semantic-ui-react";
+import { UserContext } from "../../context/UserContextProvider";
+import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
+import UserInfoCard from "../molecules/UserInfoCard";
 
 const DashboardPage = () => {
-  const [activeItem, setActiveItem] = useState('leave')
-  const handleItemClick = (e, { name }) => setActiveItem(name);
-
+  const {state} = useContext(UserContext)
+  const {_id, branch, department, dob, email, firstName, lastName, img, position} = state.user;
   return (
     <Container>
-        <Menu attached='top' tabular>
-          <Menu.Item
-            name='leave'
-            active={activeItem === 'leave'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='payroll'
-            active={activeItem === 'payroll'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='bonus'
-            active={activeItem === 'bonus'}
-            onClick={handleItemClick}
-          />
-        </Menu>
-        <Segment attached='bottom'>
-          { 
-            activeItem ==='bonus' ?
-            <Bonus /> : 
-            activeItem === "leave" ?
-            <Attendance absentDates = {['01/01/2021','05/01/2021','20/01/2021']} />:
-            <Payroll />
-          }
-        </Segment>
+        <UserInfoCard
+          fluid={true}
+          _id={_id}
+          branch ={branch}
+          department = {department}
+          dob={dob}
+          email={email}
+          firstName={firstName}
+          lastName={lastName}
+          img={img}
+          position={position}
+         />
+        <EmployeeRequestMenu />
     </Container>
   );
 }

@@ -49,11 +49,14 @@ const LoginForm = () => {
           />
           <Button type='submit'>Submit</Button>
       </Form>
-      {state.error ? <Message 
+      {
+        state.error ? <Message 
         error={state.error?true:false}
         header="Error"
         content={state.error}
-      />:null}
+        />
+        :null
+      }
     </Segment>
   </Container>
   );

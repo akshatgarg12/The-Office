@@ -23,5 +23,13 @@ nav div{
   align-items: center;
 }
 .nav-links li{
-  margin:auto 10px
+  margin:auto 10px;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+  color:black
+}
+a:hover{
+  color:black
 }

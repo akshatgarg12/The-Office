@@ -10,7 +10,8 @@ export const ACTIONS = {
 export const AuthReducer = (state, action) => {
     switch(action.type){
       case ACTIONS.LOGIN:
-        localStorage.setItem('user', action.payload);
+        console.log(action.payload);
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
         return {...action.payload, loading:false}
       case ACTIONS.LOGOUT:
         localStorage.removeItem('user');
@@ -18,7 +19,8 @@ export const AuthReducer = (state, action) => {
       case ACTIONS.LOADING:
         return {user:null,error:null,loading:true};
       case ACTIONS.CURRENT_USER:
-        const userData = localStorage.getItem('user');
+        const userData = JSON.parse(localStorage.getItem('user'));
+        console.log(localStorage.getItem('user'), userData)
         return {user:userData,error:null,loading:true}  
       default:
         return state;

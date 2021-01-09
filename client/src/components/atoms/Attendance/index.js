@@ -1,8 +1,15 @@
 import Calendar from 'react-calendar';
 import {useState} from 'react';
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container, Segment } from 'semantic-ui-react';
 import './style.css';
 
+var getDaysArray = function(start, end) {
+  for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
+      arr.push(new Date(dt));
+  }
+  
+  return arr.map(d => d.toLocaleDateString());
+};
 
 const Attendance = ({absentDates}) => {
   const [value, onChange] = useState(new Date());
@@ -18,20 +25,23 @@ const Attendance = ({absentDates}) => {
     }
   }
   
-  // console.log(value.toLocaleDateString());
   return (
     <Container textAlign="center">
-      <Calendar
-          className="calender"
-          onChange={onChange}
-          value={value}
-          selectRange={true}
-          showNavigation={'YYYY-MM-DD'}
-          tileClassName = {tileClassName}
-      />
-      <Button onClick={()=>{
-          // console.log("Please provide me with leave from ", value);
-      }}>Request Leave</Button>
+      <Segment>
+        <Calendar
+            className="calender"
+            onChange={onChange}
+            value={value}
+            returnValue={"range"}
+            selectRange={true}
+            showNavigation={'YYYY-MM-DD'}
+            tileClassName = {tileClassName}
+        />
+        <Button onClick={()=>{
+            const dates = getDaysArray(value[0], value[1]);
+            console.log("Please provide me with leave from ", dates);
+        }}>Request Leave</Button>
+      </Segment>
     </Container>
   );
 }

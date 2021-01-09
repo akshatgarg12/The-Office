@@ -6,7 +6,6 @@ import DashboardPage from './components/pages/dashboard';
 import 'react-calendar/dist/Calendar.css';
 const App =()=> {
   return (
-    <Router>
       <Switch>
         <Route path='/' exact children = {<CreateEmployeePage />}/>
         <ProtectedRoute path='/discussion' children = {<CreateEmployeePage />}/>
@@ -14,7 +13,6 @@ const App =()=> {
         <ProtectedRoute path='/dashboard' component = {DashboardPage}/>
         <Route component={()=><h1>404 Page not found</h1>}/>
       </Switch>
-    </Router>
   );
 }
 
