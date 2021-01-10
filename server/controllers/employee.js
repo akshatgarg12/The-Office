@@ -2,7 +2,7 @@ const Employee = require('../model/employee');
 const bcrypt = require('bcrypt')
 
 const EmployeeMethods = {
-  create:async (req,res) => {
+  CREATE:async (req,res) => {
       const {
         firstName,
         lastName,

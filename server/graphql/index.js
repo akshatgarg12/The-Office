@@ -27,17 +27,25 @@ const UserType = new GraphQLObjectType({
         return parent.dob.toLocaleDateString();
       }
     },
-    attendance:{
+    presentDates:{
       type:GraphQLList(AttendanceType),
       async resolve(parent, _){
-        // check the attendance model
         const {_id} = parent
-        const data = await Attendance.find({employee_id : _id})
+        const data = await Attendance.find({employee_id : _id, type:'present'})
+        return data
+      }
+    },
+    absentDates:{
+      type:GraphQLList(AttendanceType),
+      async resolve(parent, _){
+        const {_id} = parent
+        const data = await Attendance.find({employee_id : _id, type:'absent'})
         return data
       }
     }
   })
 })
+
 
 const AttendanceType = new GraphQLObjectType({
   name:'Attendance',
@@ -56,6 +64,9 @@ const AttendanceType = new GraphQLObjectType({
       resolve(parent, _){
         return parent.date.toLocaleDateString();
       }
+    },
+    type:{
+      type:GraphQLString
     }
   })
 });

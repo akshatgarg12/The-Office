@@ -9,6 +9,11 @@ const attendanceSchema = new mongoose.Schema({
   date:{
     type:Date,
     required:[true, 'date is required']
+  },
+  type:{
+    type:String,
+    required:[true, 'type is required'],
+    enum:['present','absent']
   }
 });
 
