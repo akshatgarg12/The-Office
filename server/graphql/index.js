@@ -55,7 +55,7 @@ const AttendanceType = new GraphQLObjectType({
       type:UserType,
       async resolve(parent, _){
         const {employee_id} = parent;
-        const data = await Employee.findOne({employee_id});
+        const data = await Employee.findOne({_id:employee_id});
         return data;
       }
     },
@@ -78,7 +78,7 @@ const RootQuery = new GraphQLObjectType({
       name:'Employee',
       type:UserType,
       args:{
-        _id:{type:GraphQLNonNull(GraphQLID)},
+        _id:{type:GraphQLNonNull(GraphQLString)},
       },
       async resolve(_, args){
         const {_id} = args;

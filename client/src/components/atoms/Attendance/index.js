@@ -1,5 +1,6 @@
 import Calendar from 'react-calendar';
 import { Button, Container } from 'semantic-ui-react';
+import axios from 'axios';
 import './style.css';
 
 const AttendanceCalender = ({presentDates,absentDates}) => {
@@ -16,13 +17,33 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
         if(present.length){
           return "present";
         }
-      
-      
     }
+  }
+  const onClickHandler = async (e) => {
+    e.preventDefault()
+    try{
+      console.log(new Date())
+      const response = await axios('/api/attendance',{
+        method:'POST',
+        data:{
+          date:new Date(),
+          type:'present'
+        },
+        headers:{
+          'Content-Type':'application/json'
+        }
+      });
+      const {data} = response;
+      console.log(data)
+    }
+   catch(e){
+     console.log(e.response);
+   }
+
   }
   return (
     <Container textAlign="center" fluid>
-      {/* <Segment> */}
+
         <Calendar
             value={new Date()}
             className="calender"
@@ -30,10 +51,8 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
             selectRange={false}
             tileClassName = {tileClassName}
         />
-        <Button onClick={()=>{
-            console.log(new Date().toLocaleDateString());
-        }}>Mark Today's Attendance</Button>
-        {/* </Segment> */}
+        <Button onClick={onClickHandler}>Mark Today's Attendance</Button>
+
     </Container>
   );
 }

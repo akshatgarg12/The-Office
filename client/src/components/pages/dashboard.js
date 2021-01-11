@@ -4,9 +4,38 @@ import { UserContext } from "../../context/UserContextProvider";
 import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
 import UserInfoCard from "../molecules/UserInfoCard";
 import AttendanceCalender from '../atoms/attendance';
+import { useQuery, gql } from '@apollo/client';
+
 const DashboardPage = () => {
   const {state} = useContext(UserContext)
-  const {_id, branch, department, dob, email, firstName, lastName, img, position} = state.user;
+  const {_id, branch, department, dob, email, firstName, lastName, img, position} = state.user
+
+  const USER_QUERY =  gql
+  `
+    query Employee($_id: String!) {
+      employee(_id:$_id){
+        absentDates{
+          date
+        }
+        presentDates{
+          date
+        }
+      }
+    }
+  `
+  const { loading, error, data } = useQuery(USER_QUERY, {
+    variables: { _id },
+  })
+
+  if(loading) console.log("loading...")
+  if(error) console.log(error);
+  if(data) {
+    var {absentDates, presentDates} = data.employee;
+    absentDates = absentDates.map((d)=>new Date(d.date).toLocaleDateString());
+    presentDates = presentDates.map((d)=>new Date(d.date).toLocaleDateString());
+    console.log(absentDates, presentDates)
+  }
+
   return (
     <Container>
         <UserInfoCard
@@ -23,8 +52,8 @@ const DashboardPage = () => {
          />
          <Header as='h3'>Attendance Calender</Header>
          <AttendanceCalender
-          absentDates= {['02/01/2021','05/01/2021','08/01/2021']}
-          presentDates = {['01/01/2021','04/01/2021','02/01/2021']}
+            absentDates= {absentDates || []}
+            presentDates = {presentDates || []}
          />
          <Header as='h3'>Employee Request Menu</Header>
         <EmployeeRequestMenu />
