@@ -17,7 +17,14 @@ const cookieParser = require('cookie-parser')
 app.use(express.json({limit:"40mb"}))
 app.use(fileUpload());
 app.use(express.urlencoded({extended:true}));
-app.use(cors())
+
+// to make cookies work
+app.use(cors({
+  credentials: true,
+  origin: true
+}))
+
+app.set("trust proxy", 1);
 app.use(cookieParser())
 app.use(helmet({
   contentSecurityPolicy:false

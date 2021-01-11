@@ -3,6 +3,7 @@ const Employee = require('../model/employee')
 
 const auth =async(req,res,next) => {
   const {user} = req.cookies;
+  console.log('auth middleware cookies :',req.cookies);
   if(!user){
     return res.status(403).send("Please Login in");
   }
