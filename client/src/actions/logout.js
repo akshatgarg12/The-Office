@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {ACTIONS} from '../reducers/auth';
-
 export const logout = async (dispatch) => {
     try{
         dispatch({type:ACTIONS.LOADING})

@@ -1,6 +1,6 @@
 import Calendar from 'react-calendar';
+import {REQUEST} from '../../../actions/http'
 import { Button, Container } from 'semantic-ui-react';
-import axios from 'axios';
 import './style.css';
 
 const AttendanceCalender = ({presentDates,absentDates}) => {
@@ -21,23 +21,24 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
   }
   const onClickHandler = async (e) => {
     e.preventDefault()
+    
     try{
+      const data = {
+        date:new Date(),
+        type:'present'
+      }
       console.log(new Date())
-      const response = await axios('/api/attendance',{
-        method:'POST',
-        data:{
-          date:new Date(),
-          type:'present'
-        },
-        headers:{
-          'Content-Type':'application/json'
-        }
-      });
-      const {data} = response;
-      console.log(data)
+      const response = await REQUEST({
+        path:'/api/attendance',
+        method:"POST",
+        data,
+      })
+      console.log(response)
+      return;
     }
    catch(e){
-     console.log(e.response);
+     console.log(e.message);
+     return;
    }
 
   }

@@ -2,7 +2,7 @@ import {  useState } from 'react';
 import { Form , Label, Input, Segment, Container,Message,Menu,Image} from 'semantic-ui-react'
 import {genderOptions, jobOptions, positionOptions, branchOptions} from './options';
 import PreviewEmployeeInfo from '../PreviewEmployeeInfo';
-import axios from 'axios';
+import {REQUEST} from '../../../actions/http';
 import './style.css';
 
 const toBase64 = file => new Promise((resolve, reject) => {
@@ -18,16 +18,16 @@ const ImageUploaderComponent = ({details, setDetails}) => {
   
   const ImageUploader = async () =>{
     if(!selectedFile) return;
-
     const file = await toBase64(selectedFile);
-        const imgUpload = await axios('/api/fileUpload',{
-          method:"POST",
-          data:{
-            file
-          },
-        })
-    console.log(imgUpload.data);
-    setDetails({...details, img:imgUpload.data});
+    const imgUpload = await REQUEST({
+      path:'/api/fileUpload',
+      method:"POST",
+      data:{
+        file
+      },
+    })
+    console.log(imgUpload);
+    setDetails({...details, img:imgUpload});
   }
  
   return (
@@ -84,28 +84,26 @@ const AddEmployeeForm = () => {
     e.preventDefault()
     setLoading(true);
     try{
-      const requestData = await axios('/api/employee',{
+      const requestData = await REQUEST({
+        path:'/api/employee',
         method:"POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        data:details
+        data:details,
       })
-      console.log(requestData.data);
+      console.log(requestData);
       setMessage({
         show:true,
         type:'success',
         header:'Success',
-        content:`A new Employee has been created with ID : ${requestData.data}`
+        content:`A new Employee has been created with ID : ${requestData}`
       });
     }
     catch(e){
-      console.log(e.response.data);
+      console.log(e.message);
       setMessage({
         show:true,
         type:'error',
         header:'Error',
-        content:e.response.data
+        content:e.message
       });
     }finally{
       setLoading(false);
