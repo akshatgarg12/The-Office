@@ -1,11 +1,42 @@
 import {useState} from 'react';
-import { Button, Container,Form, TextArea } from 'semantic-ui-react';
+import { Button, Container,Form, TextArea, Message} from 'semantic-ui-react';
+import {REQUEST} from '../../../actions/http'
+import {USER_REQUESTS_TYPE} from '../../../constants'
 import './style.css';
+
 const Bonus = () => {
   const [details, setDetails] = useState({
     money:'',
     message:""
   });
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
+
+  const onClickHandler = async (e) => {
+    e.preventDefault()
+    try{
+      const data = {
+        amount:details.money,
+        message:details.message
+      }
+      const response = await REQUEST({
+        path:'/api/request',
+        method:"POST",
+        data:{
+          type:USER_REQUESTS_TYPE.BONUS,
+          data
+        },
+      })
+      console.log(response)
+      setSuccess('request has been created!')
+      return;
+    }
+   catch(e){
+     console.log(e.message);
+     setError(e.message);
+     return;
+   }
+  }
   return (
     <Container>
           <Form>
@@ -24,9 +55,17 @@ const Bonus = () => {
                   placeholder='Elaborate your needs and arguments...'
               />
             </Form>
-            <Button onClick={()=>{
-                console.log(details);
-            }} className="btn-padding">Bonus Request</Button>
+            <Button onClick={onClickHandler} className="btn-padding">Bonus Request</Button>
+            {error ?
+              <Message negative>
+                <p>{error}</p>
+              </Message> : null
+            }
+            {success ?
+              <Message success>
+                <p>{success}</p>
+              </Message> : null
+            }
     </Container>
   );
 }

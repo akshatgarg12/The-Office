@@ -40,7 +40,6 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
      console.log(e.message);
      return;
    }
-
   }
   return (
     <Container textAlign="center" fluid>

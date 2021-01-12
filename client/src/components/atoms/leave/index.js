@@ -1,6 +1,8 @@
 import Calendar from 'react-calendar';
 import {useState} from 'react';
-import { Button, Container, Form, TextArea } from 'semantic-ui-react';
+import { Button, Container, Form, TextArea, Message } from 'semantic-ui-react';
+import {REQUEST} from '../../../actions/http'
+import {USER_REQUESTS_TYPE} from '../../../constants'
 import './style.css';
 
 var getDaysArray = function(start, end) {
@@ -8,15 +10,47 @@ var getDaysArray = function(start, end) {
       arr.push(new Date(dt));
   }
   
-  return arr.map(d => d.toLocaleDateString());
+  return arr
 };
 
-const LeaveRequest = ({absentDates}) => {
+
+const LeaveRequest = () => {
   const [details, setDetails] = useState({
     value : new Date(),
     message:""
   });
-  
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
+
+  const onClickHandler = async (e) => {
+    e.preventDefault()
+    try{
+      const dates = getDaysArray(details.value[0],details.value[1])
+      const data = {
+        dates:dates,
+        message:details.message
+      }
+      const response = await REQUEST({
+        path:'/api/request',
+        method:"POST",
+        data:{
+          type:USER_REQUESTS_TYPE.LEAVE,
+          data
+        },
+      })
+      console.log(response)
+      setSuccess('request has been created!')
+      setError(null)
+      return;
+    }
+   catch(e){
+     console.log(e.message);
+     setError(e.message);
+     setSuccess(null)
+     return;
+   }
+  }
+
   return (
     <Container textAlign="left">
         <Calendar
@@ -39,10 +73,17 @@ const LeaveRequest = ({absentDates}) => {
                 />
         </Form>
         <br/>
-        <Button onClick={()=>{
-            const dates = getDaysArray(details.value[0], details.value[1]);
-            console.log("Please provide me with leave from ", dates);
-        }}>Request Leave</Button>
+        <Button onClick={onClickHandler}>Request Leave</Button>
+         {error ?
+              <Message negative>
+                <p>{error}</p>
+              </Message> : null
+            }
+            {success ?
+              <Message success>
+                <p>{success}</p>
+              </Message> : null
+            }
     </Container>
   );
 }

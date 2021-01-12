@@ -13,7 +13,8 @@ const CREATE = async (req,res) => {
   try{
     var RequestData = data
     if(type === 'leave'){
-      const leaveDates = data.dates.map(date => stringToDate(date,"dd/MM/yyyy","/"))
+      // const leaveDates = data.dates.map(date => stringToDate(date,"dd/MM/yyyy","/"))
+      const leaveDates = data.dates
       RequestData.dates = leaveDates;
       console.log(leaveDates)
     }

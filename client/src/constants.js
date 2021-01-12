@@ -3,3 +3,9 @@ export const URL = {
   prod:"",
   use:'http://localhost:5000'
 }
+
+export const USER_REQUESTS_TYPE = {
+  BONUS:'bonus',
+  PAYROLL:'payroll',
+  LEAVE:'leave'
+}
