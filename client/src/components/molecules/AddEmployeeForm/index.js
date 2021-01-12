@@ -82,12 +82,13 @@ const AddEmployeeForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
-    setLoading(true);
+
     try{
       const requestData = await REQUEST({
         path:'/api/employee',
         method:"POST",
         data:details,
+        setLoading
       })
       console.log(requestData);
       setMessage({
@@ -105,9 +106,7 @@ const AddEmployeeForm = () => {
         header:'Error',
         content:e.message
       });
-    }finally{
-      setLoading(false);
-    } 
+    }
   }
   const handleMenuChange = (e,{name}) => setActiveMenu(name);
   return (

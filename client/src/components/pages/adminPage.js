@@ -4,14 +4,17 @@
 // create an employee
 // search any employee along with filters and edit.
 import RequestContainer from '../molecules/RequestContainer'
+// import {Header} from 'semantic-ui-react'
 
 const AdminPage = () => {
   return (
     <div>
       {/* <EmployeeRequests /> */}
+      
       <RequestContainer
         requests = {[
-          {
+          { 
+            _id:"1",
             status:"pending",
             employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
             data:{
@@ -21,6 +24,7 @@ const AdminPage = () => {
             type:'bonus'
           },
           {
+            _id:"1",
             status:"pending",
             employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
             data:{

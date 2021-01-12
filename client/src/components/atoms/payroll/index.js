@@ -9,6 +9,9 @@ const Payroll = () => {
   });
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+
   const onClickHandler = async (e) => {
     e.preventDefault()
     try{
@@ -22,6 +25,7 @@ const Payroll = () => {
           type:USER_REQUESTS_TYPE.PAYROLL,
           data
         },
+        setLoading
       })
       console.log(response)
       setSuccess('request has been created!')
@@ -44,7 +48,7 @@ const Payroll = () => {
                 placeholder='Message along with the request...'
             />
             </Form>
-            <Button onClick={onClickHandler} className="btn-padding">Payroll Request</Button>
+            <Button loading={loading} onClick={onClickHandler} className="btn-padding">Payroll Request</Button>
             {error ?
               <Message negative>
                 <p>{error}</p>

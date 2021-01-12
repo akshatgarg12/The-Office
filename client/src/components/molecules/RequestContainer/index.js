@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {Card, Menu, Segment, Container} from 'semantic-ui-react'
+import {Card, Menu, Segment, Container, Header} from 'semantic-ui-react'
 import RequestCard from '../../atoms/request'
 
 const RequestContainer = ({requests}) => {
@@ -12,6 +12,7 @@ const RequestContainer = ({requests}) => {
   const handleItemClick = (e, { name }) => setActiveItem(name);
   return (
     <Container>
+       <Header as='h3' block>Requests From Employees</Header>
         <Menu attached='top' tabular>
           <Menu.Item
             name='pending'
@@ -31,8 +32,10 @@ const RequestContainer = ({requests}) => {
         </Menu>
         <Segment attached='bottom'>
             <Card.Group centered>
-              {requestsToShow.map(request => {
+              {requestsToShow.map((request, index) => {
                 return <RequestCard 
+                            key = {index}
+                            status = {request.status}
                             employee = {request.employee}
                             data = {request.data}
                             type = {request.type}

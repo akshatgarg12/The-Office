@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Segment, Menu } from "semantic-ui-react";
+import { Segment, Menu, Header } from "semantic-ui-react";
 import LeaveRequest from "../../atoms/leave";
 import Bonus from "../../atoms/bonus";
 import Payroll from '../../atoms/payroll';
@@ -10,6 +10,9 @@ const EmployeeRequestMenu = () => {
   const handleItemClick = (e, { name }) => setActiveItem(name);
   return (
     <div className="user-request-menu">
+        <Header attached="top" as="h3" textAlign="left">
+          User Request Menu
+        </Header>
         <Menu attached='top' tabular>
           <Menu.Item
             name='leave'

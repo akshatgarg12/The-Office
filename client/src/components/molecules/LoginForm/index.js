@@ -9,6 +9,8 @@ const LoginForm = () => {
   const router = useHistory()
   const {state,dispatch} = useContext(UserContext);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [details, setDetails] = useState({
     email:"",
     password:""
@@ -17,7 +19,9 @@ const LoginForm = () => {
   
   const submitHandler = async (e) => {
       e.preventDefault();
+      setLoading(true)
       const loginUser = await login(dispatch,details);
+      setLoading(false)
       if(loginUser){
         return router.replace('/dashboard');
       }else{
@@ -48,7 +52,7 @@ const LoginForm = () => {
               value={details.password} 
               onChange={changeHandler}
           />
-          <Button type='submit'>Submit</Button>
+          <Button loading = {loading} type='submit'>Submit</Button>
       </Form>
       {
         state.error ? <Message 

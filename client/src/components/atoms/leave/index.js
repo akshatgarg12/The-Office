@@ -9,7 +9,6 @@ var getDaysArray = function(start, end) {
   for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
       arr.push(new Date(dt));
   }
-  
   return arr
 };
 
@@ -21,6 +20,7 @@ const LeaveRequest = () => {
   });
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const onClickHandler = async (e) => {
     e.preventDefault()
@@ -37,6 +37,7 @@ const LeaveRequest = () => {
           type:USER_REQUESTS_TYPE.LEAVE,
           data
         },
+        setLoading
       })
       console.log(response)
       setSuccess('request has been created!')
@@ -73,7 +74,7 @@ const LeaveRequest = () => {
                 />
         </Form>
         <br/>
-        <Button onClick={onClickHandler}>Request Leave</Button>
+        <Button loading={loading} onClick={onClickHandler}>Request Leave</Button>
          {error ?
               <Message negative>
                 <p>{error}</p>

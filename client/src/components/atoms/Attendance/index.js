@@ -1,13 +1,13 @@
 import Calendar from 'react-calendar';
 import {REQUEST} from '../../../actions/http'
-import { Button, Container, Message } from 'semantic-ui-react';
+import { Button, Container, Message, Header } from 'semantic-ui-react';
 import './style.css';
 import { useState } from 'react';
 
 const AttendanceCalender = ({presentDates,absentDates}) => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false)
   function tileClassName({ date, view }) {
     // Add class to tiles in month view only
     if (view === 'month') {
@@ -24,17 +24,18 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
   }
   const onClickHandler = async (e) => {
     e.preventDefault()
-    
+    var date = new Date()
+    date = date.toDateString().split('T')[0]
     try{
       const data = {
-        date:new Date(),
+        date:new Date(date),
         type:'present'
       }
-      console.log(new Date())
       const response = await REQUEST({
         path:'/api/attendance',
         method:"POST",
         data,
+        setLoading
       })
       console.log(response)
       setSuccess('attendance for today marked,refresh to see the results.')
@@ -50,7 +51,9 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
   }
   return (
     <Container textAlign="center" fluid>
-
+        <Header as='h3' attached='top' textAlign="left">
+          Attendance Calendar
+        </Header>
         <Calendar
             value={new Date()}
             className="calender"
@@ -58,7 +61,7 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
             selectRange={false}
             tileClassName = {tileClassName}
         />
-        <Button onClick={onClickHandler}>Mark Today's Attendance</Button>
+        <Button loading={loading} onClick={onClickHandler}>Mark Today's Attendance</Button>
         {
           error ? 
           <Message error>

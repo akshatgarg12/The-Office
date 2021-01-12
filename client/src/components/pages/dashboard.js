@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Container, Header} from "semantic-ui-react";
+import { Container} from "semantic-ui-react";
 import { UserContext } from "../../context/UserContextProvider";
 import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
 import UserInfoCard from "../molecules/UserInfoCard";
@@ -53,12 +53,12 @@ const DashboardPage = () => {
           img={img}
           position={position}
          />
-         <Header as='h3'>Attendance Calender</Header>
+
          <AttendanceCalender
             absentDates= {absentDates || []}
             presentDates = {presentDates || []}
          />
-         <Header as='h3'>Employee Request Menu</Header>
+
         <EmployeeRequestMenu />
         
     </Container>

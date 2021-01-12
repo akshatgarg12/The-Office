@@ -11,6 +11,7 @@ const Bonus = () => {
   });
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const onClickHandler = async (e) => {
     e.preventDefault()
@@ -26,6 +27,7 @@ const Bonus = () => {
           type:USER_REQUESTS_TYPE.BONUS,
           data
         },
+        setLoading
       })
       console.log(response)
       setSuccess('request has been created!')
@@ -55,7 +57,7 @@ const Bonus = () => {
                   placeholder='Elaborate your needs and arguments...'
               />
             </Form>
-            <Button onClick={onClickHandler} className="btn-padding">Bonus Request</Button>
+            <Button loading={loading} onClick={onClickHandler} className="btn-padding">Bonus Request</Button>
             {error ?
               <Message negative>
                 <p>{error}</p>
