@@ -1,9 +1,14 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.SchemaType
+const {ObjectId,Date} = mongoose.SchemaTypes
 
 const requestDataSchema = new mongoose.Schema({
+  // if request is bonus
   amount:{
     type:Number
+  },
+  // if request is leave
+  dates:{
+    type:[Date],
   },
   message:{
     type:String,
