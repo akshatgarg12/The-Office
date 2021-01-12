@@ -25,6 +25,8 @@ const loginUser = async (req,res) => {
   try{
     const match = await bcrypt.compare(password, hashedPassword);
     employee.password = undefined;
+    const dob = employee.dob.toLocaleDateString()
+    employee.dob = dob;
     if(match){
       res.cookie('user', getToken(employee._id),{maxAge:OneDayInSec*1000, httpOnly:true});
       return res.status(200).json({user:employee, error:null});

@@ -35,7 +35,10 @@ const DashboardPage = () => {
     presentDates = presentDates.map((d)=>new Date(d.date).toLocaleDateString());
     console.log(absentDates, presentDates)
   }
-
+  const titleCase = (text) => {
+    var temp = text.toLowerCase();
+    return temp.charAt(0).toUpperCase() + temp.substr(1).toLowerCase()
+  }
   return (
     <Container>
         <UserInfoCard
@@ -43,10 +46,10 @@ const DashboardPage = () => {
           _id={_id}
           branch ={branch}
           department = {department}
-          dob={dob}
+          dob={dob.split('T')[0]}
           email={email}
-          firstName={firstName}
-          lastName={lastName}
+          firstName={titleCase(firstName)}
+          lastName={titleCase(lastName)}
           img={img}
           position={position}
          />
