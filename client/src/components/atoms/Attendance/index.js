@@ -14,23 +14,24 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
       // Check if a date React-Calendar wants to check is on the list of dates to add class to
       const absent = absentDates?absentDates.filter((d) => d === date.toLocaleDateString()):[];
       const present = presentDates?presentDates.filter((d) => d === date.toLocaleDateString()):[];
-        if(absent.length){
-          return "absent";
-        }
         if(present.length){
           return "present";
         }
+        if(absent.length){
+          return "absent";
+        }
+        
     }
   }
   const onClickHandler = async (e) => {
     e.preventDefault()
-    var date = new Date()
-    date = date.toDateString().split('T')[0]
     try{
+      const date = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate())
       const data = {
-        date:new Date(date),
+        date:date,
         type:'present'
       }
+      console.log(data)
       const response = await REQUEST({
         path:'/api/attendance',
         method:"POST",

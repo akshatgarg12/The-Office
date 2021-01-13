@@ -4,73 +4,60 @@
 // create an employee
 // search any employee along with filters and edit.
 import RequestContainer from '../molecules/RequestContainer'
+import {Loader, Dimmer} from 'semantic-ui-react'
+import { useQuery, gql } from '@apollo/client';
+
 // import {Header} from 'semantic-ui-react'
 
 const AdminPage = () => {
+  const REQUESTS_QUERY = gql
+    `
+    query AdminDashboard{
+      requests{
+        _id
+        employee{
+          _id
+          name
+          img
+        }
+        status
+        data{
+          amount 
+          message
+          dates{
+            startDate
+            endDate
+          }
+        }
+        type
+        resolved_by{
+          name
+          img
+        }
+      }
+    } 
+  `;
+  const { loading, error, data } = useQuery(REQUESTS_QUERY);
+  if(loading){
+    return (
+    <Dimmer active>
+      <Loader size='small'>Loading</Loader>
+    </Dimmer>
+  )
+  }
+  if(error){
+    return (
+    <Dimmer active>
+     <p>Some error occured! {error}</p>
+    </Dimmer>
+    )
+  }
+  const {requests} = data;
+  // console.log(requests)
   return (
     <div>
-      {/* <EmployeeRequests /> */}
-      
       <RequestContainer
-        requests = {[
-          { 
-            _id:"1",
-            status:"pending",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              amount:500,
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'bonus'
-          },
-          {
-            _id:"1",
-            status:"pending",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              amount:500,
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'bonus'
-          },{
-            status:"pending",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              amount:500,
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'bonus'
-          },{
-            status:"pending",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              amount:500,
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'bonus'
-          },
-          {
-            status:"approved",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              startDate:'13/01/2021',
-              endDate:'15/01/2021',
-              dates:['13/01/2021', '14/01/2021', '15/01/2021'],
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'leave'
-          },
-          {
-            status:"rejected",
-            employee:{name:"Akshat garg", img:'https://react.semantic-ui.com/images/avatar/large/steve.jpg'},
-            data:{
-              startDate:'13/01/2021',
-              endDate:'15/01/2021',
-              dates:['13/01/2021', '14/01/2021', '15/01/2021'],
-              message:"I reallhy need this, its a necessity"
-            },
-            type:'leave'
-          }]}
+        requests = {requests}
        />
     </div>
   );

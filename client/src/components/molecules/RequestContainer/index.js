@@ -35,10 +35,12 @@ const RequestContainer = ({requests}) => {
               {requestsToShow.map((request, index) => {
                 return <RequestCard 
                             key = {index}
+                            _id = {request._id}
                             status = {request.status}
                             employee = {request.employee}
                             data = {request.data}
                             type = {request.type}
+                            resolved_by = {request.resolved_by}
                         />
               })}
             </Card.Group>

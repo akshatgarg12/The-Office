@@ -1,10 +1,38 @@
+import {useState} from 'react'
 import { Button, Card, Image, Message } from 'semantic-ui-react'
 import {USER_REQUESTS_TYPE} from '../../../constants'
+import {REQUEST} from '../../../actions/http'
 
-const RequestCard = ({_id,employee,type,data,status}) => {
+const RequestCard = ({_id,employee,type,data,status,resolved_by}) => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
+  const onClickHandler = async (e, {name}) => {
+    e.preventDefault()
+    try{
+      const response = await REQUEST({
+        path:'/api/request',
+        method:"PATCH",
+        data:{
+          _id,
+          status:name
+        },
+        setLoading
+      })
+      setError(null)
+      console.log(response);
+      setSuccess(response)
+    }catch(e){
+      console.log(e.message)
+      setError(e.message)
+      setSuccess(null)
+    }finally{
+      return;
+    }
+  }
   return (
-    <Card color="brown">
+    <Card color="grey" loading={loading.toString()}>
       <Card.Content>
         <Image
           floated='right'
@@ -16,7 +44,7 @@ const RequestCard = ({_id,employee,type,data,status}) => {
         <Card.Description>
         <strong>{
           type === USER_REQUESTS_TYPE.LEAVE &&
-          ` is asking for leave from ${data.startDate} to ${data.endDate}`
+          ` is asking for leave from ${data.dates.startDate} to ${data.dates.endDate}`
         }
         {
           type === USER_REQUESTS_TYPE.BONUS &&
@@ -34,18 +62,32 @@ const RequestCard = ({_id,employee,type,data,status}) => {
         status === 'pending' ? 
         <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='green' onClick = {()=> console.log("request  approved")}>
+          <Button basic color='green' onClick = {onClickHandler} name="approved">
             Approve
           </Button>
-          <Button basic color='red'>
+          <Button basic color='red' onClick={onClickHandler} name="rejected">
             Decline
           </Button>
         </div>
         {/* success or error based on server response */}
-        <Message success size="mini"><p>request has been approved.</p></Message>
+        {
+          error ? 
+          <Message error size="mini"><p>{error}</p></Message> : null
+        }
+        {
+          success ? 
+          <Message success size="mini"><p>{success}</p></Message> : null
+        }
       </Card.Content> : 
       <Card.Content extra>
-        <Message success size="mini"><p>request has been {status}.</p></Message>
+          <Image
+            floated='right'
+            size='mini'
+            avatar
+            src={resolved_by.img}
+          />
+          <p>resolved by {resolved_by.name}</p>
+          <Message color="brown" size="mini"><p>request has been {status}.</p></Message>
       </Card.Content> 
       }
      

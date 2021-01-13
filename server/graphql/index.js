@@ -5,6 +5,22 @@ const Employee = require('../model/employee')
 const Attendance = require('../model/attendance')
 const Request = require('../model/request')
 
+const dateConverter = (time) => {
+  let date_ob = new Date(time);
+
+  // adjust 0 before single digit date
+  let date = ("0" + date_ob.getDate()).slice(-2);
+
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+  // current year
+  let year = date_ob.getFullYear();
+  return date + '/' + month + '/' + year
+} 
+
+// user/employee types
+
 const UserType = new GraphQLObjectType({
   name:'User',
   fields:()=>({
@@ -47,6 +63,7 @@ const UserType = new GraphQLObjectType({
   })
 })
 
+// attendance types
 
 const AttendanceType = new GraphQLObjectType({
   name:'Attendance',
@@ -68,25 +85,49 @@ const AttendanceType = new GraphQLObjectType({
     },
     type:{
       type:GraphQLString
-    }
+    },
+    
   })
 });
-
+// request types
+const LeaveRequestDateType = new GraphQLObjectType({
+  name:'dates',
+  fields:()=>({
+    startDate:{ 
+      type:GraphQLString,
+      resolve(parent, _){
+        if(parent && parent.length){
+            return dateConverter(parent[0])
+        }
+        return null;
+      }
+    },
+    endDate:{
+      type:GraphQLString,
+      resolve(parent, _){
+        if(parent && parent.length){
+          return dateConverter(parent[parent.length-1])
+      }
+      return null;
+    }
+  }
+  })
+})
 const RequestDataType = new GraphQLObjectType({
   name:'RequestData',
   fields: () => ({
     amount:{
       type:GraphQLInt
     },
-    dates:{
-      type:GraphQLList(GraphQLString)
+    dates:{ 
+      type:LeaveRequestDateType,
+      
     },
     message:{
       type:GraphQLNonNull(GraphQLString)
     }
   })
 })
-
 
 const RequestType = new GraphQLObjectType({
   name:'Request',
@@ -104,6 +145,17 @@ const RequestType = new GraphQLObjectType({
       type:RequestDataType
     },
     type:{type:GraphQLNonNull(GraphQLString)},
+    resolved_by:{
+      type:UserType,
+      async resolve(parent, _){
+        const {resolved_by} = parent
+        if(resolved_by){
+          const data = await Employee.findOne({_id:resolved_by})
+          return data
+        }
+        return null
+      }
+    }
   })
 })
 
@@ -133,7 +185,7 @@ const RootQuery = new GraphQLObjectType({
       },
       async resolve(_, args){
         // const {_id, employee_id, status} = args
-        var data = await Request.find({...args});
+        var data = await Request.find({...args}).sort({ createdAt: 'descending' });
         return data;
       }
     }

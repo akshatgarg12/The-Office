@@ -32,6 +32,7 @@ const CREATE = async (req,res) => {
 const RESOLVE = async (req,res) => {
   const resolved_by = req.user._id;
   const {_id, status} = req.body;
+  console.log(req.body)
   if(!_id || !status){
     return res.status(400).send('Please fill the status and request id')
   }
@@ -52,7 +53,7 @@ const RESOLVE = async (req,res) => {
         request.resolved_by = resolved_by
         request.status = 'rejected'
         const newData = await request.save();
-        return res.status(200).send(newData);
+        return res.status(200).send('request has been rejected');
     }
 
     // work on accept for different types
@@ -76,7 +77,7 @@ const RESOLVE = async (req,res) => {
         // remove this request.
         request = {...request, resolved_by, status:'rejected'};
         const newData = await request.save();
-        return res.status(200).send(newData);
+        return res.status(200).send('request has been rejected due to no dates!');
       }
       const leaves = dates.map((date) => {
         return {
@@ -99,7 +100,7 @@ const RESOLVE = async (req,res) => {
     request.resolved_by = resolved_by
     request.status = 'approved'
     const newData = await request.save();
-    return res.status(200).send(newData);
+    return res.status(200).send('request has been approved');
     
   }catch(e){
      console.log(e)

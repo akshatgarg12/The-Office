@@ -2,6 +2,7 @@ const Attendance = require('../model/attendance')
 
 const MARK = async (req,res) => {
   const {date, type} = req.body;
+  console.log(req.body)
   if(!date || !type){
     return res.status(400).send("Send date and type both to mark attendance!")
   }
