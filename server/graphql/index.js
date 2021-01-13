@@ -1,8 +1,9 @@
 const {
-  GraphQLSchema, GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean,GraphQLNonNull, GraphQLList
+  GraphQLSchema, GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean,GraphQLNonNull, GraphQLList, GraphQLInputObjectType, GraphQLInt
 } = require('graphql')
 const Employee = require('../model/employee')
 const Attendance = require('../model/attendance')
+const Request = require('../model/request')
 
 const UserType = new GraphQLObjectType({
   name:'User',
@@ -71,6 +72,42 @@ const AttendanceType = new GraphQLObjectType({
   })
 });
 
+const RequestDataType = new GraphQLObjectType({
+  name:'RequestData',
+  fields: () => ({
+    amount:{
+      type:GraphQLInt
+    },
+    dates:{
+      type:GraphQLList(GraphQLString)
+    },
+    message:{
+      type:GraphQLNonNull(GraphQLString)
+    }
+  })
+})
+
+
+const RequestType = new GraphQLObjectType({
+  name:'Request',
+  fields:() => ({
+    _id:{type:GraphQLNonNull(GraphQLString)},
+    status:{type:GraphQLNonNull(GraphQLString)},
+    employee:{
+      type:UserType,
+      async resolve(parent, _){
+        const user = await Employee.findOne({_id: parent.employee_id})
+        return user
+      }
+    },
+    data:{
+      type:RequestDataType
+    },
+    type:{type:GraphQLNonNull(GraphQLString)},
+  })
+})
+
+
 const RootQuery = new GraphQLObjectType({
   name:"RootQuery",
   fields:() => ({
@@ -83,6 +120,20 @@ const RootQuery = new GraphQLObjectType({
       async resolve(_, args){
         const {_id} = args;
         const data = await Employee.findOne({_id});
+        return data;
+      }
+    },
+    requests:{
+      name:'Requests',
+      type:GraphQLList(RequestType),
+      args:{
+        _id:{type:GraphQLString},
+        employee_id:{type:GraphQLString},
+        status:{type:GraphQLString},
+      },
+      async resolve(_, args){
+        // const {_id, employee_id, status} = args
+        var data = await Request.find({...args});
         return data;
       }
     }
