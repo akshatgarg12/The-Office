@@ -4,8 +4,10 @@
 // create an employee
 // search any employee along with filters and edit.
 import RequestContainer from '../molecules/RequestContainer'
+import AddEmployeeForm from '../molecules/AddEmployeeForm'
 import {Loader, Dimmer} from 'semantic-ui-react'
 import { useQuery, gql } from '@apollo/client';
+import CreatePostMenu from '../molecules/CreatePostMenu';
 
 // import {Header} from 'semantic-ui-react'
 
@@ -59,6 +61,11 @@ const AdminPage = () => {
       <RequestContainer
         requests = {requests}
        />
+       <div style={{height:"50px"}}></div>
+       <AddEmployeeForm />
+       {/* post creation */}
+       <div style={{height:"50px"}}></div>
+      <CreatePostMenu />
     </div>
   );
 }

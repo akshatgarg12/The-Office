@@ -1,48 +1,10 @@
 import {  useState } from 'react';
-import { Form , Label, Input, Segment, Container,Message,Menu,Image} from 'semantic-ui-react'
+import { Form , Label, Input, Segment, Container,Message,Menu,} from 'semantic-ui-react'
 import {genderOptions, jobOptions, positionOptions, branchOptions} from './options';
 import PreviewEmployeeInfo from '../PreviewEmployeeInfo';
 import {REQUEST} from '../../../actions/http';
 import './style.css';
-
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
-
- 
-const ImageUploaderComponent = ({details, setDetails}) => {
-  const [selectedFile, setSelectedFile]  = useState(null);
-  
-  const ImageUploader = async () =>{
-    if(!selectedFile) return;
-    const file = await toBase64(selectedFile);
-    const imgUpload = await REQUEST({
-      path:'/api/fileUpload',
-      method:"POST",
-      data:{
-        file
-      },
-    })
-    console.log(imgUpload);
-    setDetails({...details, img:imgUpload});
-  }
- 
-  return (
-    <Segment attached='bottom' inverted className="form-container">
-        <Image src={details.img || ""} size='large' centered />
-          <Form inverted className="form-container" onSubmit={ImageUploader}>
-            <Form.Input type="file" label="Image of Employee" name="img" onChange={(e,{value})=>{
-                setSelectedFile(e.target.files[0])
-                console.log(e.target.files[0]);
-              }}/>
-              <Form.Button type='submit'>upload Image</Form.Button>
-            </Form>
-      </Segment>
-  )
-}
+import ImageUploaderComponent from '../../atoms/imageUploader';
 
 const AddEmployeeForm = () => {
   // state
@@ -111,7 +73,7 @@ const AddEmployeeForm = () => {
   const handleMenuChange = (e,{name}) => setActiveMenu(name);
   return (
 
-    <Container >
+    <Container>
       <Menu attached='top' tabular inverted>
         <Menu.Item
           name='form'
