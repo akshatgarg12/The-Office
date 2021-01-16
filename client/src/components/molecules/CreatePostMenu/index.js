@@ -28,8 +28,9 @@ const CreatePostMenu = () => {
   const submitHandler =async (e) => {
     e.preventDefault()
     try{
+      console.log(html)
       const response = await REQUEST({
-        path:'/',
+        path:'/api/post',
         method:"POST",
         data:{
           img:details.img,
@@ -50,7 +51,7 @@ const CreatePostMenu = () => {
   return (
     <Container>
         <div className="user-request-menu">
-          <Header attached="top" as="h3" textAlign="left">
+          <Header attached="top" as="h3" textAlign="left" block>
             Create a post for discussion
           </Header>
           <Menu attached='top' tabular>

@@ -7,7 +7,7 @@ import './style.css';
 import ImageUploaderComponent from '../../atoms/imageUploader';
 
 const AddEmployeeForm = () => {
-  // state
+  // state  
   const [details, setDetails] = useState({
       firstName:"",
       lastName:"",
@@ -21,7 +21,6 @@ const AddEmployeeForm = () => {
       dob:"",
       img:""
   });
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({
     show:false,

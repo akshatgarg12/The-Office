@@ -61,11 +61,12 @@ const AdminPage = () => {
       <RequestContainer
         requests = {requests}
        />
-       <div style={{height:"50px"}}></div>
-       <AddEmployeeForm />
-       {/* post creation */}
-       <div style={{height:"50px"}}></div>
+      {/* post creation */}
+      <div style={{height:"50px"}}></div>
       <CreatePostMenu />
+      <div style={{height:"50px"}}></div>
+      <AddEmployeeForm />
+      <div style={{height:"50px"}}></div>
     </div>
   );
 }

@@ -4,6 +4,8 @@ const {
 const Employee = require('../model/employee')
 const Attendance = require('../model/attendance')
 const Request = require('../model/request')
+const Post = require('../model/post')
+const { ConnectionStates } = require('mongoose')
 
 const dateConverter = (time) => {
   let date_ob = new Date(time);
@@ -64,7 +66,6 @@ const UserType = new GraphQLObjectType({
 })
 
 // attendance types
-
 const AttendanceType = new GraphQLObjectType({
   name:'Attendance',
   fields: () => ({
@@ -159,7 +160,31 @@ const RequestType = new GraphQLObjectType({
   })
 })
 
+// posts
+const PostType = new GraphQLObjectType({
+  name:'Post',
+  fields:() => ({
+    _id:{
+      type:GraphQLString,
+    },
+    html:{
+      type:GraphQLString,
+    },
+    img:{
+      type:GraphQLString
+    },
+    created_by:{
+      type:UserType,
+      async resolve(parent, _){
+        const {created_by} = parent;
+        const employee = await Employee.findOne({_id:created_by});
+        return employee; 
+      }
+    }
+  })
+})
 
+// Root Query
 const RootQuery = new GraphQLObjectType({
   name:"RootQuery",
   fields:() => ({
@@ -184,8 +209,18 @@ const RootQuery = new GraphQLObjectType({
         status:{type:GraphQLString},
       },
       async resolve(_, args){
-        // const {_id, employee_id, status} = args
-        var data = await Request.find({...args}).sort({ createdAt: 'descending' });
+        const data = await Request.find({...args}).sort({ createdAt: 'descending' });
+        return data;
+      }
+    },
+    posts:{
+      name:'Posts',
+      type:GraphQLList(PostType),
+      args:{
+        _id:{type:GraphQLString},
+      },
+      async resolve(_, args){
+        const data = await Post.find({...args}).sort({ createdAt: 'descending' });;
         return data;
       }
     }

@@ -4,6 +4,7 @@ const employeeActions= require('../controllers/employee')
 const attendanceActions = require('../controllers/attendance') 
 const userActions = require('../controllers/auth')
 const requestActions = require('../controllers/requests')
+const postActions = require('../controllers/post')
 const auth = require('../middleware/auth')
 const isAdmin = require('../middleware/isAdmin')
 // routes for employee table
@@ -23,5 +24,9 @@ router.post('/attendance',auth,attendanceActions.MARK)
 router.post('/request',auth,requestActions.CREATE)
 // resolving requests
 router.patch('/request', auth, isAdmin,requestActions.RESOLVE)
+
+// creating a post
+router.post('/post', auth, postActions.CREATE);
+
 
 module.exports = router;

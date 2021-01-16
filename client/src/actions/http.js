@@ -17,7 +17,6 @@ export const REQUEST = async ({path, data, method, setLoading}) => {
   catch(e){
     console.log(e);
     console.log(e.response);
-    
     throw new Error(e.response.data);
   }finally{
     if(setLoading) setLoading(false)
