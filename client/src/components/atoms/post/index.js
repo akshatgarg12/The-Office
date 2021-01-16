@@ -7,7 +7,7 @@ const Post = ({post}) => {
           <Feed.Event>
             <Feed.Content>
               <Feed.Summary>
-              <Image avatar src={post.created_by.img} />
+              <Image avatar src={post.created_by.img || ""} />
                <strong>{post.created_by.name}</strong> posted 
                 <br/>
                 <br/>

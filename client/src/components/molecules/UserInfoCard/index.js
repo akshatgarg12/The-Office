@@ -1,7 +1,7 @@
 import {Card, Image, Icon, Segment } from 'semantic-ui-react'
 import './style.css';
 
-const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName, img, position, fluid }) => {
+const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName, img, salary, position, fluid }) => {
   return (
     <Segment textAlign='center'>
       {
@@ -27,6 +27,9 @@ const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName,
         </Card.Description>
         <Card.Description>
          Branch : <span className="highlight">{branch}</span>
+        </Card.Description>
+        <Card.Description>
+         Salary : <span className="highlight">${salary}</span>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

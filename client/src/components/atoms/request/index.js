@@ -3,7 +3,7 @@ import { Button, Card, Image, Message } from 'semantic-ui-react'
 import {USER_REQUESTS_TYPE} from '../../../constants'
 import {REQUEST} from '../../../actions/http'
 
-const RequestCard = ({_id,employee,type,data,status,resolved_by}) => {
+const RequestCard = ({_id,employee,type,data,status,resolved_by,disabled = false}) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
@@ -62,10 +62,10 @@ const RequestCard = ({_id,employee,type,data,status,resolved_by}) => {
         status === 'pending' ? 
         <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='green' onClick = {onClickHandler} name="approved">
+          <Button basic color='green' onClick = {onClickHandler} name="approved" disabled={disabled}>
             Approve
           </Button>
-          <Button basic color='red' onClick={onClickHandler} name="rejected">
+          <Button basic color='red' onClick={onClickHandler} name="rejected" disabled={disabled}>
             Decline
           </Button>
         </div>
@@ -87,7 +87,8 @@ const RequestCard = ({_id,employee,type,data,status,resolved_by}) => {
             src={resolved_by.img}
           />
           <p>resolved by {resolved_by.name}</p>
-          <Message color="brown" size="mini"><p>request has been {status}.</p></Message>
+
+          <Message color={status==="approved"?"green":"red"} size="mini"><p>request has been {status}.</p></Message>
       </Card.Content> 
       }
      
