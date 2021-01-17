@@ -13,7 +13,7 @@ const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName,
     <Card fluid = {fluid}>
       { 
       !fluid &&
-      <Image src={img} wrapped ui={true} size="medium" centered />
+      <Image src={img} wrapped ui={true} size="medium" centered/>
       }
       <Card.Content className="content">
         <Card.Header><h2>{firstName} {lastName}</h2></Card.Header>

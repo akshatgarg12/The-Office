@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {Card, Menu, Segment, Container, Header} from 'semantic-ui-react'
 import RequestCard from '../../atoms/request'
 
-const RequestContainer = ({requests}) => {
+const RequestContainer = ({requests, disabled=false}) => {
   const [activeItem, setActiveItem] = useState('pending');
   const [requestsToShow, setRequestsToShow] = useState([]);
   useEffect(()=>{
@@ -41,6 +41,7 @@ const RequestContainer = ({requests}) => {
                             data = {request.data}
                             type = {request.type}
                             resolved_by = {request.resolved_by}
+                            disabled = {disabled}
                         />
               })}
             </Card.Group>

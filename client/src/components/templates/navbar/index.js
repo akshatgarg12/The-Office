@@ -24,7 +24,8 @@ const Navbar = () => {
       ]
     }
   }
-  const logoLink = state.user ? '/dashboard' : '/';
+  // const logoLink = state.user ? '/dashboard' : '/';
+  const logoLink = '/';
   const clickHandler =  () => logout(dispatch);
   return (
     <nav>

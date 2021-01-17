@@ -5,7 +5,7 @@ import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
 import UserInfoCard from "../molecules/UserInfoCard";
 import AttendanceCalender from '../atoms/attendance';
 import { useQuery, gql } from '@apollo/client';
-import UserRequests from "../molecules/UserRequests";
+import RequestContainer from "../molecules/RequestContainer";
 
 const DashboardPage = () => {
   const {state} = useContext(UserContext)
@@ -84,10 +84,9 @@ const DashboardPage = () => {
             absentDates= {absentDates || []}
             presentDates = {presentDates || []}
          />
-
         <EmployeeRequestMenu />
-        <UserRequests requests={requests || []} />
-        
+        <RequestContainer requests={requests || []} disabled={true} />
+        <div style={{height:"50px"}}></div>
     </Container>
   );
 }

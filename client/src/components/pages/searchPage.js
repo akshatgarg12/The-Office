@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Input, Dimmer, Loader, Segment, Card, Button, Message, Select } from 'semantic-ui-react'
+import { Container, Input, Dimmer, Loader, Segment, Card, Button, Message, Select, Header } from 'semantic-ui-react'
 import {gql, useQuery} from '@apollo/client'
 import UserInfoCard from '../molecules/UserInfoCard'
 import Fuse from 'fuse.js'
@@ -62,10 +62,10 @@ const SearchPage = () => {
       </Dimmer>
     )
   }
-  // console.log(data);
   
   return (
     <Container>
+      <Header as="h2" block>Search Employee by {sortBy}</Header>
       <Input
          type='text' placeholder='Search...' action
          value={value}

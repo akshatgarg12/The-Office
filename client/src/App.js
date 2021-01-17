@@ -7,12 +7,13 @@ import DashboardPage from './components/pages/dashboard';
 import AdminPage from './components/pages/adminPage';
 import DiscussionPage from './components/pages/discussion';
 import SearchPage from './components/pages/searchPage';
+import HomePage from './components/pages/homePage';
 import 'react-calendar/dist/Calendar.css';
 
 const App =()=> {
   return (
       <Switch>
-        <Route path='/' exact children = {<CreateEmployeePage />}/>
+        <Route path='/' exact children = {HomePage}/>
         <Route path='/login' children = {<LoginPage />}/>
         <ProtectedRoute path='/dashboard' component = {DashboardPage}/>
         <ProtectedRoute path='/discussion' component = {DiscussionPage} />
