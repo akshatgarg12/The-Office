@@ -12,11 +12,13 @@ const Navbar = () => {
   if(state.user){
       navLinks = [
       'Discussion',
+      'Search',
       'Dashboard',
     ];
     if(state.user.isAdmin){
       navLinks = [
         'Discussion',
+        'Search',
         'Dashboard',
         'Admin',
       ]

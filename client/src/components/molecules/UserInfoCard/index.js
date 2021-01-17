@@ -3,7 +3,7 @@ import './style.css';
 
 const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName, img, salary, position, fluid }) => {
   return (
-    <Segment textAlign='center'>
+    <>
       {
         fluid &&
         <div>
@@ -13,7 +13,7 @@ const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName,
     <Card fluid = {fluid}>
       { 
       !fluid &&
-      <Image src={img} wrapped ui={true} />
+      <Image src={img} wrapped ui={true} size="medium" centered />
       }
       <Card.Content className="content">
         <Card.Header><h2>{firstName} {lastName}</h2></Card.Header>
@@ -34,10 +34,10 @@ const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName,
       </Card.Content>
       <Card.Content extra>
           <Icon name='mail' />
-          {email}
+           {email}
       </Card.Content>
   </Card>
-  </Segment>
+  </>
   );
 }
  

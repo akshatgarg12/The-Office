@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Container} from "semantic-ui-react";
+import { Container, Segment} from "semantic-ui-react";
 import { UserContext } from "../../context/UserContextProvider";
 import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
 import UserInfoCard from "../molecules/UserInfoCard";
@@ -65,20 +65,21 @@ const DashboardPage = () => {
   }
   return (
     <Container>
-        <UserInfoCard
-          fluid={true}
-          _id={_id}
-          branch ={branch}
-          department = {department}
-          dob={dob.split('T')[0]}
-          email={email}
-          firstName={titleCase(firstName)}
-          lastName={titleCase(lastName)}
-          img={img}
-          position={position}
-          salary={salary}
-         />
-
+        <Segment textAlign="center">
+          <UserInfoCard
+            fluid={true}
+            _id={_id}
+            branch ={branch}
+            department = {department}
+            dob={dob.split('T')[0]}
+            email={email}
+            firstName={titleCase(firstName)}
+            lastName={titleCase(lastName)}
+            img={img}
+            position={position}
+            salary={salary}
+          />
+         </Segment>
          <AttendanceCalender
             absentDates= {absentDates || []}
             presentDates = {presentDates || []}

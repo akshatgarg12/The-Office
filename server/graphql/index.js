@@ -200,6 +200,14 @@ const RootQuery = new GraphQLObjectType({
         return data;
       }
     },
+    employees:{
+      name:'Employees',
+      type:GraphQLList(UserType),
+      async resolve(_, __){
+        const data = await Employee.find({});
+        return data;
+      }
+    },
     requests:{
       name:'Requests',
       type:GraphQLList(RequestType),
