@@ -10,6 +10,11 @@ const getToken = (_id) => {
   return token
 }
 
+const __prod__ = process.env.NODE_ENV === 'production';
+const cookieConfig = {
+  httpOnly:true, sameSite:'None', secure:__prod__
+}
+
 const loginUser = async (req,res) => {
   const {email, password} = req.body
   if(!email || !password){
@@ -28,7 +33,7 @@ const loginUser = async (req,res) => {
     const dob = employee.dob.toLocaleDateString()
     employee.dob = dob;
     if(match){
-      res.cookie('user', getToken(employee._id),{maxAge:OneDayInSec*1000, httpOnly:true, sameSite:'None'});
+      res.cookie('user', getToken(employee._id),{maxAge:OneDayInSec*1000, ...cookieConfig });
       return res.status(200).json({user:employee, error:null});
     }
       
@@ -42,7 +47,7 @@ const loginUser = async (req,res) => {
 }
 
 const logoutUser = (req,res) => {
-    res.cookie('user', null, {maxAge:1})
+    res.cookie('user', null, {maxAge:1,...cookieConfig})
     res.send("Successfully logged out")
 }
 
