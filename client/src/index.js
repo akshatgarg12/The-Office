@@ -13,7 +13,7 @@ import client from './config/graphql'
 // router
 import {BrowserRouter as Router} from 'react-router-dom'
 // templates
-import Navbar from './components/Templates/Navbar';
+import Navbar from './components/templates/navbar';
 
 ReactDOM.render(
   <ApolloProvider client={client}>

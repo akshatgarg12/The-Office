@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Input, Dimmer, Loader, Segment, Card, Button, Message, Select, Header } from 'semantic-ui-react'
 import {gql, useQuery} from '@apollo/client'
-import UserInfoCard from '../Molecules/UserInfoCard'
+import UserInfoCard from '../molecules/UserInfoCard'
 import Fuse from 'fuse.js'
 const options = [
   { key: 'department', text: 'department', value: 'department' },

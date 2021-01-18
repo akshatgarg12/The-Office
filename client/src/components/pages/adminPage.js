@@ -3,11 +3,11 @@
 // see purani requests
 // create an employee
 // search any employee along with filters and edit.
-import RequestContainer from '../Molecules/RequestContainer'
-import AddEmployeeForm from '../Molecules/AddEmployeeForm'
+import RequestContainer from '../molecules/RequestContainer'
+import AddEmployeeForm from '../molecules/AddEmployeeForm'
 import {Loader, Dimmer} from 'semantic-ui-react'
 import { useQuery, gql } from '@apollo/client';
-import CreatePostMenu from '../Molecules/CreatePostMenu';
+import CreatePostMenu from '../molecules/CreatePostMenu';
 
 // import {Header} from 'semantic-ui-react'
 
