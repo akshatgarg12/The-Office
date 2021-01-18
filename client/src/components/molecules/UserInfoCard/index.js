@@ -1,4 +1,4 @@
-import {Card, Image, Icon, Segment } from 'semantic-ui-react'
+import {Card, Image, Icon, } from 'semantic-ui-react'
 import './style.css';
 
 const UserInfoCard = ({_id, branch, department, dob, email, firstName, lastName, img, salary, position, fluid }) => {
