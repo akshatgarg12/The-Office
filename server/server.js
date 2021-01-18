@@ -23,12 +23,11 @@ app.use(cors({
   credentials: true,
   origin: true
 }))
-
 app.set("trust proxy", 1);
 app.use(cookieParser())
-app.use(helmet({
-  contentSecurityPolicy:false
-}))
+// app.use(helmet({
+//   contentSecurityPolicy:false
+// }))
 
 // api routes
 app.use(
