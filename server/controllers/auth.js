@@ -28,7 +28,7 @@ const loginUser = async (req,res) => {
     const dob = employee.dob.toLocaleDateString()
     employee.dob = dob;
     if(match){
-      res.cookie('user', getToken(employee._id),{maxAge:OneDayInSec*1000, httpOnly:true});
+      res.cookie('user', getToken(employee._id),{maxAge:OneDayInSec*1000, httpOnly:true, sameSite:'None'});
       return res.status(200).json({user:employee, error:null});
     }
       
