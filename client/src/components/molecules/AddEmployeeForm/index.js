@@ -4,7 +4,7 @@ import {genderOptions, jobOptions, positionOptions, branchOptions} from './optio
 import PreviewEmployeeInfo from '../PreviewEmployeeInfo';
 import {REQUEST} from '../../../actions/http';
 import './style.css';
-import ImageUploaderComponent from '../../atoms/imageUploader';
+import ImageUploaderComponent from '../../atoms/ImageUploader';
 
 const AddEmployeeForm = () => {
   // state  

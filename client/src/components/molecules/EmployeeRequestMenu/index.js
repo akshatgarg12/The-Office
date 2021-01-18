@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Segment, Menu, Header } from "semantic-ui-react";
-import LeaveRequest from "../../atoms/leave";
-import Bonus from "../../atoms/bonus";
-import Payroll from '../../atoms/payroll';
+import LeaveRequest from "../../atoms/Leave";
+import Bonus from "../../atoms/Bonus";
+import Payroll from '../../atoms/Payroll';
 import './style.css'
 
 const EmployeeRequestMenu = () => {
