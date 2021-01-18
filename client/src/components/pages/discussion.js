@@ -33,7 +33,7 @@ const DiscussionPage = () => {
   }
   // data
   return (
-    <Container style={{padding:"10px", margin:"auto"}}>
+    <Container style={{padding:"10px", margin:"auto", overflowX:"hidden"}}>
       <PostContainer posts= {data.posts} />
     </Container>
   );

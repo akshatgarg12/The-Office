@@ -14,7 +14,7 @@ const Post = ({post}) => {
               </Feed.Summary>
               <Image size="large" src={post.img} />
               <br/>
-              <div dangerouslySetInnerHTML = {{__html:post.html}}></div>
+              <div dangerouslySetInnerHTML = {{__html:post.html}} style={{padding:"10px"}}></div>
             </Feed.Content>
           </Feed.Event>
           </Segment>
