@@ -19,6 +19,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
       <UserContextProvider>
+          {/* <Navbar /> */}
           <Navbar />
           <App />
       </UserContextProvider>
