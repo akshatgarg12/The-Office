@@ -3,7 +3,7 @@ import { Container, Segment} from "semantic-ui-react";
 import { UserContext } from "../../context/UserContextProvider";
 import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
 import UserInfoCard from "../molecules/UserInfoCard";
-import AttendanceCalender from '../atoms/attendance';
+import AttendanceCalender from '../atoms/Attendance';
 import { useQuery, gql } from '@apollo/client';
 import RequestContainer from "../molecules/RequestContainer";
 

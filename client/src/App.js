@@ -1,7 +1,7 @@
 import {Switch, Route} from 'react-router-dom';
 // import CreateEmployeePage from './components/pages/createEmployee';
 import LoginPage from './components/pages/loginPage';
-import ProtectedRoute from './components/atoms/protectedRoute';
+import ProtectedRoute from './components/atoms/ProtectedRoute';
 import AdminRoute from './components/atoms/adminRoute';
 import DashboardPage from './components/pages/dashboard';
 import AdminPage from './components/pages/adminPage';
