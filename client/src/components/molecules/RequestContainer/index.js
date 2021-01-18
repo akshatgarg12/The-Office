@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {Card, Menu, Segment, Container, Header} from 'semantic-ui-react'
-import RequestCard from '../../atoms/Request'
+import RequestCard from '../../Atoms/Request'
 
 const RequestContainer = ({requests, disabled=false}) => {
   const [activeItem, setActiveItem] = useState('pending');

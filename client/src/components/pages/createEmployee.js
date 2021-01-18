@@ -1,4 +1,4 @@
-import AddEmployeeForm from "../molecules/AddEmployeeForm";
+import AddEmployeeForm from "../Molecules/AddEmployeeForm";
 
 const CreateEmployeePage = () => {
   return (

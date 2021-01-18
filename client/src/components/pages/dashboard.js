@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Container, Segment} from "semantic-ui-react";
 import { UserContext } from "../../context/UserContextProvider";
-import EmployeeRequestMenu from "../molecules/EmployeeRequestMenu";
-import UserInfoCard from "../molecules/UserInfoCard";
-import AttendanceCalender from '../atoms/Attendance';
+import EmployeeRequestMenu from "../Molecules/EmployeeRequestMenu";
+import UserInfoCard from "../Molecules/UserInfoCard";
+import AttendanceCalender from '../Atoms/Attendance';
 import { useQuery, gql } from '@apollo/client';
-import RequestContainer from "../molecules/RequestContainer";
+import RequestContainer from "../Molecules/RequestContainer";
 
 const DashboardPage = () => {
   const {state} = useContext(UserContext)

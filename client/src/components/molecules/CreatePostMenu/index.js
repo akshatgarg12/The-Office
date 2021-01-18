@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Segment, Menu, Header, Container, Image, Button, Message } from "semantic-ui-react";
-import MyTextEditor from "../../atoms/TextEditor";
+import MyTextEditor from "../../Atoms/TextEditor";
 import RichTextEditor from 'react-rte';
-import ImageUploaderComponent from "../../atoms/ImageUploader";
+import ImageUploaderComponent from "../../Atoms/ImageUploader";
 import {REQUEST} from '../../../actions/http'
 const PreviewPost = ({html, img}) => {
   return (

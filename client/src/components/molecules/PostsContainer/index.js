@@ -1,4 +1,4 @@
-import Post from '../../atoms/Post'
+import Post from '../../Atoms/Post'
 
 const PostContainer = ({posts}) => {
   return (

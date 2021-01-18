@@ -1,6 +1,6 @@
 import {Container, Dimmer, Loader} from 'semantic-ui-react';
 import {gql, useQuery} from '@apollo/client'
-import PostContainer from '../molecules/PostsContainer';
+import PostContainer from '../Molecules/PostsContainer';
 
 const DiscussionPage = () => {
   const POSTS_QUERY = gql`

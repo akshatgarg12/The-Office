@@ -1,13 +1,13 @@
 import {Switch, Route} from 'react-router-dom';
 // import CreateEmployeePage from './components/pages/createEmployee';
-import LoginPage from './components/pages/LoginPage';
-import ProtectedRoute from './components/atoms/ProtectedRoute';
-import AdminRoute from './components/atoms/AdminRoute';
-import DashboardPage from './components/pages/Dashboard';
-import AdminPage from './components/pages/AdminPage';
-import DiscussionPage from './components/pages/Discussion';
-import SearchPage from './components/pages/SearchPage';
-import HomePage from './components/pages/HomePage';
+import LoginPage from './components/Pages/LoginPage';
+import ProtectedRoute from './components/Atoms/ProtectedRoute';
+import AdminRoute from './components/Atoms/AdminRoute';
+import DashboardPage from './components/Pages/Dashboard';
+import AdminPage from './components/Pages/AdminPage';
+import DiscussionPage from './components/Pages/Discussion';
+import SearchPage from './components/Pages/SearchPage';
+import HomePage from './components/Pages/HomePage';
 import 'react-calendar/dist/Calendar.css';
 
 const App =()=> {
