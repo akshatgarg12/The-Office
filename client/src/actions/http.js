@@ -7,10 +7,9 @@ export const REQUEST = async ({path, data, method, setLoading}) => {
       method,
       data,
       headers:{
-          'Content-Type':'application/json',
+          'Content-Type':'application/json'
       },
       withCredentials:true,
-      // baseURL:URL.use,
     });
     return response.data
   }
