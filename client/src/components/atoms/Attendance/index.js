@@ -26,7 +26,7 @@ const AttendanceCalender = ({presentDates,absentDates}) => {
   const onClickHandler = async (e) => {
     e.preventDefault()
     try{
-      const date = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate())
+      const date = new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate() + 1)
       const data = {
         date:date,
         type:'present'

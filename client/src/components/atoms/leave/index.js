@@ -6,7 +6,9 @@ import {USER_REQUESTS_TYPE} from '../../../constants'
 import './style.css';
 
 var getDaysArray = function(start, end) {
-  for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
+  const startDate = new Date(start.getFullYear(),start.getMonth(),start.getDate() + 1)
+  const endDate = new Date(end.getFullYear(),end.getMonth(),end.getDate() + 1)
+  for(var arr=[],dt=new Date(startDate); dt<=endDate; dt.setDate(dt.getDate()+1)){
       arr.push(new Date(dt));
   }
   return arr
