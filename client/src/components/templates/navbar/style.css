@@ -1,4 +1,4 @@
-nav{
+nav {
   /* position: absolute; */
   display: flex;
   width: 100%;
@@ -10,61 +10,61 @@ nav{
   margin-bottom: 20px;
   padding: 10px 20px;
   background-color: bisque;
-  height:55px;
+  height: 55px;
   z-index: 100;
 }
-nav h1{
+nav h1 {
   margin: auto 0;
 }
-nav div{
+nav div {
   margin: auto 0;
 }
-.nav-links{
+.nav-links {
   list-style: none;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.nav-links li{
-  margin:auto 10px;
+.nav-links li {
+  margin: auto 10px;
   cursor: pointer;
 }
-.single-link{
+.single-link {
   list-style: none;
   margin: auto 0;
-  color:black;
+  color: black;
   font-size: 1.5rem;
 }
-.nav-burger{
+.nav-burger {
   display: none;
 }
-a{
+a {
   text-decoration: none;
-  color:black
+  color: black;
 }
-a:hover{
-  color:black
+a:hover {
+  color: black;
 }
-.nav-burger span{
-  height:30px;
+.nav-burger span {
+  height: 30px;
   width: 30px;
   background-color: azure;
 }
 
-@media screen and (max-width:700px) { 
-  .nav-links{
+@media screen and (max-width: 700px) {
+  .nav-links {
     display: none;
   }
-  .nav-burger{
+  .nav-burger {
     display: block;
   }
-  .nav-burger-links{
+  .nav-burger-links {
     display: block;
     width: 100%;
     z-index: 100;
     position: absolute;
-    top:55px;
-    right:0;
+    top: 55px;
+    right: 0;
     background-color: blanchedalmond;
   }
   .nav-burger-links {
@@ -73,12 +73,11 @@ a:hover{
     flex-direction: column;
     justify-content: center;
   }
-  .nav-burger-links > .link{
-    padding:10px;
+  .nav-burger-links > .link {
+    padding: 10px;
   }
 
-  .hidden{
+  .hidden {
     display: none;
   }
-
 }

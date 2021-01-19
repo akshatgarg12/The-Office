@@ -1,31 +1,32 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
 }
 
-.row-flex{
-  display:flex;
+.row-flex {
+  display: flex;
   flex-direction: row;
 }
-.col-flex{
-  display:flex;
+.col-flex {
+  display: flex;
   flex-direction: column;
 }
-.hero{
+.hero {
   height: 50vh;
-  background:url("https://images.indianexpress.com/2020/06/the-office-759.jpg")  no-repeat center fixed;
+  background: url("https://images.indianexpress.com/2020/06/the-office-759.jpg")
+    no-repeat center fixed;
   background-size: cover;
 }
-.hero h3{
+.hero h3 {
   display: flex;
   line-height: 50vh;
   justify-content: center;
   margin: auto;
-  font-size: 4.0rem;
+  font-size: 4rem;
   color: white;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
 }
-pre{
-  padding:10px;
-  background-color:#F3F3F3;
+pre {
+  padding: 10px;
+  background-color: #f3f3f3;
 }

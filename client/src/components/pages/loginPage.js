@@ -1,4 +1,4 @@
-import LoginForm from '../molecules/LoginForm';
+import LoginForm from "../molecules/LoginForm";
 
 const LoginPage = () => {
   return (
@@ -6,6 +6,6 @@ const LoginPage = () => {
       <LoginForm />
     </div>
   );
-}
- 
+};
+
 export default LoginPage;
