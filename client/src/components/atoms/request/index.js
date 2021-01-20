@@ -78,8 +78,8 @@ const RequestCard = ({
            null
         }
       <Card.Content>
-        <Image floated="right" size="mini" src={employee.img} />
-        <Card.Header>{employee.name}</Card.Header>
+        <Image floated="right" size="mini" src={employee?.img} />
+        <Card.Header>{employee?.name}</Card.Header>
         <Card.Meta>{type} request</Card.Meta>
         <Card.Description>
           <strong>

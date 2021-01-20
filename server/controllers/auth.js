@@ -11,11 +11,15 @@ const getToken = (_id) => {
 };
 
 const __prod__ = process.env.NODE_ENV === "production";
-const cookieConfig = {
+const devCookieConfig = {
+   httpOnly: true,
+}
+const prodCookieConfig = {
   httpOnly: true,
   sameSite: "None",
   secure: __prod__,
 };
+const cookieConfig = __prod__ ? prodCookieConfig : devCookieConfig
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;

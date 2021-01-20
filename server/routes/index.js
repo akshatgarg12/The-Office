@@ -9,6 +9,7 @@ const auth = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
 // routes for employee table
 router.post("/employee", auth, isAdmin, employeeActions.CREATE);
+router.delete("/employee", auth, isAdmin, employeeActions.DELETE);
 
 // route to upload images
 router.post("/fileUpload", fileUpload);

@@ -1,5 +1,6 @@
-import { Card, Image, Icon } from "semantic-ui-react";
-import {useContext} from 'react'
+import { Card, Image, Icon, Message } from "semantic-ui-react";
+import {useContext, useState} from 'react'
+import {REQUEST} from '../../../actions/http'
 import {UserContext} from '../../../context/UserContextProvider'
 import "./style.css";
 
@@ -16,6 +17,34 @@ const UserInfoCard = ({
   position,
   fluid,
 }) => {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const deleteHandler = async () => {
+    // eslint-disable-next-line no-restricted-globals
+    if(!confirm(`Are you sure you want to delete ${firstName}`)){
+      console.log("canceled delete");
+      return;
+    }
+    try{
+      const response = await REQUEST({
+        path:'/api/employee',
+        method:"DELETE",
+        data:{
+          _id
+        },
+        setLoading
+      })
+      setSuccess(response)
+      setError(null)
+    }catch(e){
+      setSuccess(null)
+      setError(e.message)
+    }finally{
+      return;
+    }
+  }
   const {state} = useContext(UserContext)
   return (
     <>
@@ -61,9 +90,19 @@ const UserInfoCard = ({
           {email}
         </Card.Content>
           {state?.user?.isAdmin ? <Card.Content extra textAlign="right">
-            <Icon name="trash" />
-            <Icon name="pencil" />
+            <Icon name="trash" onClick={deleteHandler} loading={loading} />
+            {/* <Icon name="pencil" /> */}
           </Card.Content> : null }
+          {error ? 
+          <Message negative>
+            <p>{error}</p>
+          </Message>
+           : null}
+        {success ? 
+          <Message success>
+            <p>{success}</p>
+          </Message>
+           : null}
       </Card>
     </>
   );
