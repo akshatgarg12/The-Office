@@ -48,7 +48,7 @@ const Post = ({ post }) => {
           <div ref={htmlDiv} style={{ padding: "10px" }}></div>
         </Feed.Content>
       </Feed.Event>
-    {state.user.isAdmin ? <Icon name="trash" loading={loading} onClick ={deletePost}/> : null}
+    {state?.user?.isAdmin ? <Icon name="trash" loading={loading} onClick ={deletePost}/> : null}
       {error ? (
         <Message negative>
           <p>{error}</p>

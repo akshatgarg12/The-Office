@@ -1,4 +1,6 @@
 import { Card, Image, Icon } from "semantic-ui-react";
+import {useContext} from 'react'
+import {UserContext} from '../../../context/UserContextProvider'
 import "./style.css";
 
 const UserInfoCard = ({
@@ -14,6 +16,7 @@ const UserInfoCard = ({
   position,
   fluid,
 }) => {
+  const {state} = useContext(UserContext)
   return (
     <>
       {fluid && (
@@ -58,6 +61,10 @@ const UserInfoCard = ({
           <Icon name="mail" />
           {email}
         </Card.Content>
+          {state?.user?.isAdmin ? <Card.Content extra textAlign="right">
+            <Icon name="trash" />
+            <Icon name="pencil" />
+          </Card.Content> : null }
       </Card>
     </>
   );
