@@ -109,7 +109,22 @@ const RESOLVE = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
-// TODO: might not be required when calender is used.
+
+const DELETE = async (req, res) => {
+  const {_id} = req.body
+  if(!_id){
+    return res.status(400).send("Send the _id of request to delete");
+  }
+  try{
+    const deleteRequest = await Request.deleteOne({_id});
+    console.log(deleteRequest)
+    return res.status(200).send("request has been deleted")
+  }catch(e){
+    console.log(e);
+    return res.status(400).send(e.message);
+  }
+}
+// TODO: might not be required when calender is used, used this function during api testing.
 // function used to create date string.
 function stringToDate(_date, _format, _delimiter) {
   var formatLowerCase = _format.toLowerCase();
@@ -127,4 +142,5 @@ function stringToDate(_date, _format, _delimiter) {
 module.exports = {
   CREATE,
   RESOLVE,
+  DELETE
 };

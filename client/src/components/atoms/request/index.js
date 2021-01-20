@@ -16,6 +16,7 @@ const RequestCard = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(null);
 
   const onClickHandler = async (e, { name }) => {
     e.preventDefault();
@@ -40,12 +41,40 @@ const RequestCard = ({
       return;
     }
   };
+
+  const deleteRequestHandler = async () => {
+    try {
+      const response = await REQUEST({
+        path: "/api/request",
+        method: "DELETE",
+        data: {
+          _id,
+        },
+        setLoading,
+      });
+      console.log(response);
+      setDeleteMessage(response);
+    } catch (e) {
+      console.log(e.message);
+      setDeleteMessage(e.message);
+    } finally {
+      return;
+    }
+  }
   return (
     <Card color="grey" loading={loading.toString()}>
-        { showDeleteOption ? 
-           <Card.Content extra textAlign="right">
-            Delete the request <Icon name="trash" style={{cursor:"pointer"}}/>
-           </Card.Content> : 
+        { showDeleteOption ?
+            <>
+            {
+              deleteMessage ?
+              <Message>{deleteMessage}</Message> :
+              null 
+            }
+            <Card.Content extra textAlign="right" loading={loading}>
+              Delete the request <Icon name="trash" style={{cursor:"pointer"}} onClick={deleteRequestHandler} />
+            </Card.Content> 
+           </>
+           : 
            null
         }
       <Card.Content>

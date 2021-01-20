@@ -24,6 +24,8 @@ router.post("/attendance", auth, attendanceActions.MARK);
 router.post("/request", auth, requestActions.CREATE);
 // resolving requests
 router.patch("/request", auth, isAdmin, requestActions.RESOLVE);
+router.delete("/request", auth, requestActions.DELETE);
+
 
 // creating a post
 router.post("/post", auth, postActions.CREATE);
