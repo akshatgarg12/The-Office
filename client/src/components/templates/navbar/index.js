@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav>
       <Link to={logoLink}>
-        <h1>The Office</h1>
+        <h1 className="logo">The Office</h1>
       </Link>
       {navLinks.length > 1 ? (
         <div>

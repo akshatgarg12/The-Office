@@ -30,7 +30,7 @@ const UserInfoCard = ({
         </div>
       )}
       <Card fluid={fluid}>
-        {!fluid && <Image src={img} wrapped ui={true} size="medium" centered />}
+        {!fluid && <img src={img} className="user-card-img" alt="some" />}
         <Card.Content className="content">
           <Card.Header>
             <h2>
