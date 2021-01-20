@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Image, Message } from "semantic-ui-react";
+import { Button, Card, Image, Message,Icon } from "semantic-ui-react";
 import { USER_REQUESTS_TYPE } from "../../../constants";
 import { REQUEST } from "../../../actions/http";
 
@@ -11,6 +11,7 @@ const RequestCard = ({
   status,
   resolved_by,
   disabled = false,
+  showDeleteOption = false
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,6 +42,12 @@ const RequestCard = ({
   };
   return (
     <Card color="grey" loading={loading.toString()}>
+        { showDeleteOption ? 
+           <Card.Content extra textAlign="right">
+            Delete the request <Icon name="trash" style={{cursor:"pointer"}}/>
+           </Card.Content> : 
+           null
+        }
       <Card.Content>
         <Image floated="right" size="mini" src={employee.img} />
         <Card.Header>{employee.name}</Card.Header>
@@ -101,6 +108,7 @@ const RequestCard = ({
           </Message>
         </Card.Content>
       )}
+      
     </Card>
   );
 };

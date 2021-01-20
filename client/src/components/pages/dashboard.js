@@ -97,7 +97,7 @@ const DashboardPage = () => {
         presentDates={presentDates || []}
       />
       <EmployeeRequestMenu />
-      <RequestContainer requests={requests || []} disabled={true} />
+      <RequestContainer requests={requests || []} disabled={true} showDeleteOption = {true} />
       <div style={{ height: "50px" }}></div>
     </Container>
   );

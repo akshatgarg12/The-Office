@@ -25,7 +25,6 @@ const UserInfoCard = ({
             rounded
             bordered
             src={img}
-            wrapped
             ui={true}
             size="medium"
             centered
