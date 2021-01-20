@@ -20,6 +20,21 @@ const CREATE = async (req, res) => {
   }
 };
 
+const DELETE = async (req, res) => {
+  const {_id} = req.body;
+  if(!_id){
+    return res.status(400).send("Please send _id of a post");
+  }
+  try {
+    const postDelete = await Post.deleteOne({_id})
+    console.log(postDelete)
+    return res.send("post successfully deleted");
+  } catch (e) {
+    return res.status(400).send(e.message);
+  }
+}
+
 module.exports = {
   CREATE,
+  DELETE
 };

@@ -1,12 +1,38 @@
-import { useEffect, useRef } from "react";
-import { Segment, Feed, Image } from "semantic-ui-react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Segment, Feed, Image, Icon, Message } from "semantic-ui-react";
+import { UserContext } from "../../../context/UserContextProvider";
+import {REQUEST} from '../../../actions/http'
 
 const Post = ({ post }) => {
   const htmlDiv = useRef();
+  const {state} = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   useEffect(() => {
     htmlDiv.current.innerHTML = post.html;
   }, [post]);
 
+  const deletePost = async (e) =>{
+    e.preventDefault();
+    console.log("delete post");
+    try{
+      const response = await REQUEST({
+        path:'/api/post',
+        method:"DELETE",
+        data:{
+          _id:post._id
+        },
+        setLoading
+      })
+      setSuccess(response)
+      setError(null)
+    }catch(e){
+      console.log(e.message);
+      setError(e.message)
+      setSuccess(null)
+    }
+  }
   return (
     <Segment>
       <Feed.Event>
@@ -22,6 +48,17 @@ const Post = ({ post }) => {
           <div ref={htmlDiv} style={{ padding: "10px" }}></div>
         </Feed.Content>
       </Feed.Event>
+    {state.user.isAdmin ? <Icon name="trash" loading={loading} onClick ={deletePost}/> : null}
+      {error ? (
+        <Message negative>
+          <p>{error}</p>
+        </Message>
+      ) : null}
+      {success ? (
+        <Message success>
+          <p>{success}</p>
+        </Message>
+      ) : null}
     </Segment>
   );
 };

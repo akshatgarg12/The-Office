@@ -27,5 +27,6 @@ router.patch("/request", auth, isAdmin, requestActions.RESOLVE);
 
 // creating a post
 router.post("/post", auth, postActions.CREATE);
+router.delete("/post", auth,isAdmin,postActions.DELETE);
 
 module.exports = router;
