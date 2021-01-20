@@ -1,8 +1,9 @@
 import RequestContainer from "../molecules/RequestContainer";
 import AddEmployeeForm from "../molecules/AddEmployeeForm";
-import { Loader, Dimmer } from "semantic-ui-react";
 import { useQuery, gql } from "@apollo/client";
 import CreatePostMenu from "../molecules/CreatePostMenu";
+import LoadingPage from "./loadingPage";
+import ErrorPage from "./errorPage";
 
 
 const AdminPage = () => {
@@ -35,16 +36,12 @@ const AdminPage = () => {
   const { loading, error, data } = useQuery(REQUESTS_QUERY);
   if (loading) {
     return (
-      <Dimmer active>
-        <Loader size="small">Loading</Loader>
-      </Dimmer>
+      <LoadingPage />
     );
   }
   if (error) {
     return (
-      <Dimmer active>
-        <p>Some error occured! {error}</p>
-      </Dimmer>
+     <ErrorPage error={error} />
     );
   }
   const { requests } = data;

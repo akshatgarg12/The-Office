@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import LoadingPage from './loadingPage'
+import ErrorPage from './errorPage'
 import {
   Container,
   Input,
-  Dimmer,
-  Loader,
   Segment,
   Card,
   Button,
@@ -61,18 +61,10 @@ const SearchPage = () => {
   };
 
   if (loading) {
-    return (
-      <Dimmer active>
-        <Loader size="small">Loading</Loader>
-      </Dimmer>
-    );
+    return <LoadingPage />
   }
   if (error) {
-    return (
-      <Dimmer active>
-        <p>Some error occured! {error}</p>
-      </Dimmer>
-    );
+    return <ErrorPage error={error} />
   }
 
   return (

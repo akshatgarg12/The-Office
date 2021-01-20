@@ -1,6 +1,7 @@
 import Calendar from "react-calendar";
 import { REQUEST } from "../../../actions/http";
-import { Button, Container, Message, Header } from "semantic-ui-react";
+import { Button, Container, Header } from "semantic-ui-react";
+import ShowMessage from '../showMessage';
 import "./style.css";
 import { useState } from "react";
 
@@ -72,16 +73,7 @@ const AttendanceCalender = ({ presentDates, absentDates }) => {
       <Button loading={loading} onClick={onClickHandler}>
         Mark Today's Attendance
       </Button>
-      {error ? (
-        <Message error>
-          <p>{error}</p>
-        </Message>
-      ) : null}
-      {success ? (
-        <Message success>
-          <p>{success}</p>
-        </Message>
-      ) : null}
+     <ShowMessage error={error} success={success}/>
     </Container>
   );
 };

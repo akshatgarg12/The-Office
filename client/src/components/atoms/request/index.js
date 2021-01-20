@@ -62,7 +62,7 @@ const RequestCard = ({
     }
   }
   return (
-    <Card color="grey" loading={loading.toString()}>
+    <Card color="grey">
         { showDeleteOption ?
             <>
             {
@@ -70,8 +70,8 @@ const RequestCard = ({
               <Message>{deleteMessage}</Message> :
               null 
             }
-            <Card.Content extra textAlign="right" loading={loading}>
-              Delete the request <Icon name="trash" style={{cursor:"pointer"}} onClick={deleteRequestHandler} />
+            <Card.Content extra textAlign="right">
+              Delete the request <Icon name="trash" loading={loading} style={{cursor:"pointer"}} onClick={deleteRequestHandler} />
             </Card.Content> 
            </>
            : 

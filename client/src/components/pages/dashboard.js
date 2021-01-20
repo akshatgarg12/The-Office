@@ -6,6 +6,8 @@ import UserInfoCard from "../molecules/UserInfoCard";
 import AttendanceCalender from "../atoms/Attendance";
 import { useQuery, gql } from "@apollo/client";
 import RequestContainer from "../molecules/RequestContainer";
+import LoadingPage from "./loadingPage";
+import ErrorPage from "./errorPage";
 
 const DashboardPage = () => {
   const { state } = useContext(UserContext);
@@ -60,8 +62,12 @@ const DashboardPage = () => {
     variables: { _id },
   });
 
-  if (loading) console.log("loading...");
-  if (error) console.log(error);
+  if (loading) {
+    return <LoadingPage />
+  }
+  if (error) {
+    return <ErrorPage error={error} />
+  }
   if (data) {
     var { requests } = data;
     var { absentDates, presentDates } = data.employee;

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Segment, Feed, Image, Icon, Message } from "semantic-ui-react";
+import { Segment, Feed, Image, Icon } from "semantic-ui-react";
+import ShowMessage from '../showMessage'
 import { UserContext } from "../../../context/UserContextProvider";
 import {REQUEST} from '../../../actions/http'
 
@@ -53,16 +54,7 @@ const Post = ({ post }) => {
         <Icon name="trash" loading={loading} onClick ={deletePost} color="grey"/>
         : null
       }
-      {error ? (
-        <Message negative>
-          <p>{error}</p>
-        </Message>
-      ) : null}
-      {success ? (
-        <Message success>
-          <p>{success}</p>
-        </Message>
-      ) : null}
+      <ShowMessage error={error} success={success} />
     </Segment>
   );
 };

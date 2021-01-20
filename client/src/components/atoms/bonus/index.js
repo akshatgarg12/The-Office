@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Container, Form, TextArea, Message } from "semantic-ui-react";
+import { Button, Container, Form, TextArea,} from "semantic-ui-react";
+import ShowMessage from '../showMessage'
 import { REQUEST } from "../../../actions/http";
 import { USER_REQUESTS_TYPE } from "../../../constants";
 import "./style.css";
@@ -65,16 +66,7 @@ const Bonus = () => {
       >
         Bonus Request
       </Button>
-      {error ? (
-        <Message negative>
-          <p>{error}</p>
-        </Message>
-      ) : null}
-      {success ? (
-        <Message success>
-          <p>{success}</p>
-        </Message>
-      ) : null}
+      <ShowMessage error={error} success={success} />
     </Container>
   );
 };

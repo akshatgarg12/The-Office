@@ -1,4 +1,5 @@
-import { Card, Image, Icon, Message } from "semantic-ui-react";
+import { Card, Image, Icon } from "semantic-ui-react";
+import ShowMessage from '../../atoms/showMessage';
 import {useContext, useState} from 'react'
 import {REQUEST} from '../../../actions/http'
 import {UserContext} from '../../../context/UserContextProvider'
@@ -93,16 +94,7 @@ const UserInfoCard = ({
             <Icon name="trash" onClick={deleteHandler} loading={loading} />
             {/* <Icon name="pencil" /> */}
           </Card.Content> : null }
-          {error ? 
-          <Message negative>
-            <p>{error}</p>
-          </Message>
-           : null}
-        {success ? 
-          <Message success>
-            <p>{success}</p>
-          </Message>
-           : null}
+          <ShowMessage error={error} success={success}/>
       </Card>
     </>
   );

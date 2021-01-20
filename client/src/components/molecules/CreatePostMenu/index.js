@@ -6,8 +6,8 @@ import {
   Container,
   Image,
   Button,
-  Message,
 } from "semantic-ui-react";
+import ShowMessage from '../../atoms/showMessage';
 import MyTextEditor from "../../atoms/TextEditor";
 import RichTextEditor from "react-rte";
 import ImageUploaderComponent from "../../atoms/imageUploader";
@@ -95,8 +95,7 @@ const CreatePostMenu = () => {
         <Button loading={loading} onClick={submitHandler}>
           Submit
         </Button>
-        {error ? <Message error>{error}</Message> : null}
-        {success ? <Message success>{success}</Message> : null}
+       <ShowMessage error={error} success={success} />
       </div>
     </Container>
   );

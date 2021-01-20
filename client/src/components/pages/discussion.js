@@ -1,6 +1,8 @@
-import { Container, Dimmer, Loader } from "semantic-ui-react";
+import { Container} from "semantic-ui-react";
 import { gql, useQuery } from "@apollo/client";
 import PostContainer from "../molecules/PostsContainer";
+import LoadingPage from "./loadingPage";
+import ErrorPage from "./errorPage";
 
 const DiscussionPage = () => {
   const POSTS_QUERY = gql`
@@ -19,18 +21,10 @@ const DiscussionPage = () => {
 
   const { loading, error, data } = useQuery(POSTS_QUERY);
   if (loading) {
-    return (
-      <Dimmer active>
-        <Loader size="small">Loading</Loader>
-      </Dimmer>
-    );
+    return <LoadingPage />
   }
   if (error) {
-    return (
-      <Dimmer active>
-        <p>Some error occured! {error}</p>
-      </Dimmer>
-    );
+    return <ErrorPage error={error} />
   }
   // data
   return (

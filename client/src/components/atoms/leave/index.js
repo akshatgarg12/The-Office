@@ -1,9 +1,10 @@
 import Calendar from "react-calendar";
 import { useState } from "react";
-import { Button, Container, Form, TextArea, Message } from "semantic-ui-react";
+import { Button, Container, Form, TextArea } from "semantic-ui-react";
 import { REQUEST } from "../../../actions/http";
 import { USER_REQUESTS_TYPE } from "../../../constants";
 import "./style.css";
+import ShowMessage from "../showMessage";
 
 var getDaysArray = function (start, end) {
   const startDate = new Date(
@@ -101,16 +102,7 @@ const LeaveRequest = () => {
       <Button loading={loading} onClick={onClickHandler}>
         Request Leave
       </Button>
-      {error ? (
-        <Message negative>
-          <p>{error}</p>
-        </Message>
-      ) : null}
-      {success ? (
-        <Message success>
-          <p>{success}</p>
-        </Message>
-      ) : null}
+     <ShowMessage error={error} success={success} />
     </Container>
   );
 };

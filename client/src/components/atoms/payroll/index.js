@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, Container, Form, TextArea, Message } from "semantic-ui-react";
+import { Button, Container, Form, TextArea} from "semantic-ui-react";
 import { REQUEST } from "../../../actions/http";
 import { USER_REQUESTS_TYPE } from "../../../constants";
+import ShowMessage from "../showMessage";
 
 const Payroll = () => {
   const [details, setDetails] = useState({
@@ -55,16 +56,7 @@ const Payroll = () => {
       >
         Payroll Request
       </Button>
-      {error ? (
-        <Message negative>
-          <p>{error}</p>
-        </Message>
-      ) : null}
-      {success ? (
-        <Message success>
-          <p>{success}</p>
-        </Message>
-      ) : null}
+      <ShowMessage error={error} success={success} />
     </Container>
   );
 };
