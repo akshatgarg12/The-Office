@@ -1,9 +1,10 @@
-import { Card, Image, Icon } from "semantic-ui-react";
+import { Card, Image, Icon, Button } from "semantic-ui-react";
 import ShowMessage from '../../atoms/showMessage';
 import {useContext, useState} from 'react'
 import {REQUEST} from '../../../actions/http'
 import {UserContext} from '../../../context/UserContextProvider'
 import "./style.css";
+import { useHistory } from "react-router-dom";
 
 const UserInfoCard = ({
   _id,
@@ -17,11 +18,19 @@ const UserInfoCard = ({
   salary,
   position,
   fluid,
+  showProfileButton = false,
+  showDeleteButton = false,
+  isAdmin = false
 }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  const router = useHistory()
 
+  const pushToUserProfile = () => {
+    router.push(`/users/${_id}`);
+  }
   const deleteHandler = async () => {
     // eslint-disable-next-line no-restricted-globals
     if(!confirm(`Are you sure you want to delete ${firstName}`)){
@@ -66,8 +75,9 @@ const UserInfoCard = ({
         <Card.Content className="content">
           <Card.Header>
             <h2>
-              {firstName} {lastName}
+              {firstName} {lastName} {isAdmin && <h6 style={{background:"blanchedalmond", padding:"1px 10px"}}>Admin</h6>}
             </h2>
+            
           </Card.Header>
           <Card.Description>
             Employee_id: <span className="highlight">{_id}</span>
@@ -90,11 +100,12 @@ const UserInfoCard = ({
           <Icon name="mail" />
           {email}
         </Card.Content>
-          {state?.user?.isAdmin ? <Card.Content extra textAlign="right">
-            <Icon name="trash" onClick={deleteHandler} loading={loading} />
-            {/* <Icon name="pencil" /> */}
+          {/* show delete user option only when logged in as admin */}
+          {state?.user?.isAdmin && showDeleteButton ? <Card.Content extra textAlign="right">
+            Delete Employee<Icon name="trash" onClick={deleteHandler} loading={loading} />
           </Card.Content> : null }
           <ShowMessage error={error} success={success}/>
+          {showProfileButton && <Button onClick={pushToUserProfile}>Show Profile</Button>}
       </Card>
     </>
   );

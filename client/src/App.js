@@ -8,6 +8,7 @@ import DiscussionPage from "./components/pages/discussion";
 import SearchPage from "./components/pages/searchPage";
 import HomePage from "./components/pages/homePage";
 import "react-calendar/dist/Calendar.css";
+import AboutPage from "./components/pages/aboutPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <ProtectedRoute path="/discussion" component={DiscussionPage} />
       <ProtectedRoute path="/search" component={SearchPage} />
       <AdminRoute path="/admin" component={AdminPage} />
+      <ProtectedRoute path="/users/:id" component={AboutPage} />
       <Route component={() => <h1>404 Page not found</h1>} />
     </Switch>
   );

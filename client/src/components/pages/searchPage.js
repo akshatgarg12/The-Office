@@ -34,6 +34,7 @@ const GET_ALL_EMPLOYEES = gql`
       position
       dob
       salary
+      isAdmin
     }
   }
 `;
@@ -114,6 +115,8 @@ const SearchPage = () => {
                   dob={employee.dob}
                   email={employee.email}
                   salary={employee.salary}
+                  isAdmin={employee.isAdmin}
+                  showProfileButton={true}
                 />
               );
             })
