@@ -5,7 +5,7 @@ import ShowMessage from '../showMessage';
 import "./style.css";
 import { useState } from "react";
 
-const AttendanceCalender = ({ presentDates, absentDates }) => {
+const AttendanceCalender = ({ presentDates, absentDates, showMarkAttendanceButton=true }) => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -70,9 +70,9 @@ const AttendanceCalender = ({ presentDates, absentDates }) => {
         selectRange={false}
         tileClassName={tileClassName}
       />
-      <Button loading={loading} onClick={onClickHandler}>
+      {showMarkAttendanceButton && <Button loading={loading} onClick={onClickHandler}>
         Mark Today's Attendance
-      </Button>
+      </Button>}
      <ShowMessage error={error} success={success}/>
     </Container>
   );
