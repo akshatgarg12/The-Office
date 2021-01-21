@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import PostContainer from "../molecules/PostsContainer";
 import LoadingPage from "./loadingPage";
 import ErrorPage from "./errorPage";
+import RefreshIcon from "../atoms/refreshIcon";
 
 const DiscussionPage = () => {
   const POSTS_QUERY = gql`
@@ -19,7 +20,7 @@ const DiscussionPage = () => {
     }
   `;
 
-  const { loading, error, data } = useQuery(POSTS_QUERY);
+  const { loading, error, data, refetch } = useQuery(POSTS_QUERY);
   if (loading) {
     return <LoadingPage />
   }
@@ -29,6 +30,7 @@ const DiscussionPage = () => {
   // data
   return (
     <Container style={{ padding: "10px", margin: "auto", overflowX: "hidden" }}>
+      <RefreshIcon refetch={refetch} />
       <PostContainer posts={data.posts} />
     </Container>
   );

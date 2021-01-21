@@ -8,6 +8,7 @@ import { useQuery, gql } from "@apollo/client";
 import RequestContainer from "../molecules/RequestContainer";
 import LoadingPage from "./loadingPage";
 import ErrorPage from "./errorPage";
+import RefreshIcon from "../atoms/refreshIcon";
 
 const DashboardPage = () => {
   const { state } = useContext(UserContext);
@@ -58,7 +59,7 @@ const DashboardPage = () => {
       }
     }
   `;
-  const { loading, error, data } = useQuery(USER_QUERY, {
+  const { loading, error, data, refetch } = useQuery(USER_QUERY, {
     variables: { _id },
   });
 
@@ -83,6 +84,7 @@ const DashboardPage = () => {
   };
   return (
     <Container>
+      <RefreshIcon refetch={refetch} />
       <Segment textAlign="center">
         <UserInfoCard
           fluid={true}

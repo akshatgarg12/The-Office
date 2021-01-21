@@ -15,6 +15,7 @@ import {
 import { gql, useQuery } from "@apollo/client";
 import UserInfoCard from "../molecules/UserInfoCard";
 import Fuse from "fuse.js";
+import RefreshIcon from "../atoms/refreshIcon";
 const options = [
   { key: "department", text: "department", value: "department" },
   { key: "branch", text: "branch", value: "branch" },
@@ -37,9 +38,9 @@ const GET_ALL_EMPLOYEES = gql`
   }
 `;
 const SearchPage = () => {
+  const { loading, error, data, refetch } = useQuery(GET_ALL_EMPLOYEES);
   const [sortBy, setSortBy] = useState("department");
   const [value, setValue] = useState("");
-  const { loading, error, data } = useQuery(GET_ALL_EMPLOYEES);
   const [employees, setEmployees] = useState(data?.employees || []);
   const [allEmployee, setAllEmployee] = useState(data?.employees || []);
   useEffect(() => {
@@ -69,6 +70,7 @@ const SearchPage = () => {
 
   return (
     <Container style={{ overflowX: "hidden" }}>
+      <RefreshIcon refetch={refetch} />
       <Header as="h4" block>
         Search Employee by {sortBy}
       </Header>

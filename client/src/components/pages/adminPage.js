@@ -1,9 +1,11 @@
 import RequestContainer from "../molecules/RequestContainer";
+import {Container} from 'semantic-ui-react';
 import AddEmployeeForm from "../molecules/AddEmployeeForm";
 import { useQuery, gql } from "@apollo/client";
 import CreatePostMenu from "../molecules/CreatePostMenu";
 import LoadingPage from "./loadingPage";
 import ErrorPage from "./errorPage";
+import RefreshIcon from "../atoms/refreshIcon";
 
 
 const AdminPage = () => {
@@ -33,7 +35,7 @@ const AdminPage = () => {
       }
     }
   `;
-  const { loading, error, data } = useQuery(REQUESTS_QUERY);
+  const { loading, error, data, refetch } = useQuery(REQUESTS_QUERY);
   if (loading) {
     return (
       <LoadingPage />
@@ -47,14 +49,16 @@ const AdminPage = () => {
   const { requests } = data;
   // console.log(requests)
   return (
-    <div>
+    <Container>
+      <RefreshIcon refetch={refetch} />
+      <div style={{ height: "20px" }}></div>
       <RequestContainer requests={requests} />
       <div style={{ height: "50px" }}></div>
       <CreatePostMenu />
       <div style={{ height: "50px" }}></div>
       <AddEmployeeForm />
       <div style={{ height: "50px" }}></div>
-    </div>
+    </Container>
   );
 };
 
