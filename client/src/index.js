@@ -14,6 +14,7 @@ import client from "./config/graphql";
 import { BrowserRouter as Router } from "react-router-dom";
 // templates
 import Navbar from "./components/templates/navbar";
+import Footer from "./components/templates/footer";
 
 ReactDOM.render(
   <ApolloProvider client={client}>

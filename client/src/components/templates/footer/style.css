@@ -1,0 +1,20 @@
+.footer{
+  display: block;
+  margin: 0%;
+  margin-top: 30px;
+  padding:30px;
+  background-color: #272727;
+}
+
+.footer p{
+  color:gray;
+  font-size: 14px;
+  margin: auto 30px;
+}
+
+.footer div{
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: center;
+}

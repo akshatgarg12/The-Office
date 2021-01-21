@@ -1,4 +1,5 @@
 import { Container, Header, Segment, Card, Icon } from "semantic-ui-react";
+import Footer from "../templates/footer";
 
 const PolicyCard = ({ description, link, header }) => {
   return (
@@ -39,6 +40,7 @@ const data = [
 ];
 const HomePage = () => {
   return (
+    <>
     <Container>
       <div className="hero">
         <h3>The Office</h3>
@@ -61,6 +63,8 @@ const HomePage = () => {
         </Card.Group>
       </Segment>
     </Container>
+    <Footer />
+    </>
   );
 };
 
