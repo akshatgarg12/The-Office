@@ -28,7 +28,7 @@ const DELETE = async (req, res) => {
   const employee_id = req.user._id;
   try{
     const item = await KanbanBoard.findOne({_id})
-    if(item.employee_id === employee_id){
+    if(item.employee_id.toString() === employee_id.toString()){
       await item.remove()
       return res.send("item successfully deleted")
     }else{
