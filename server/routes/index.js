@@ -7,29 +7,32 @@ const requestActions = require("../controllers/requests");
 const postActions = require("../controllers/post");
 const auth = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
-// routes for employee table
-router.post("/employee", auth, isAdmin, employeeActions.CREATE);
-router.delete("/employee", auth, isAdmin, employeeActions.DELETE);
+
+// routes for employee creation and deletion
+router.route('/employee')
+      .post(auth, isAdmin, employeeActions.CREATE)
+      .delete(auth, isAdmin, employeeActions.DELETE)
 
 // route to upload images
 router.post("/fileUpload", fileUpload);
 
-// login script
+// auth routes
 router.post("/login", userActions.LOGIN);
 router.post("/logout", userActions.LOGOUT);
 
-// attendance mark
+// attendance marking
 router.post("/attendance", auth, attendanceActions.MARK);
 
-// requests
-router.post("/request", auth, requestActions.CREATE);
-// resolving requests
-router.patch("/request", auth, isAdmin, requestActions.RESOLVE);
-router.delete("/request", auth, requestActions.DELETE);
+// requests : leave, payroll, bonus (CUD)
+router.route('/request')
+      .post(auth, requestActions.CREATE)
+      .patch(auth, isAdmin, requestActions.RESOLVE)
+      .delete(auth,requestActions.DELETE)
 
+// creating and deleting a post in discussion
+router.route('/post')
+      .post(auth, postActions.CREATE)
+      .delete(auth, postActions.DELETE)
 
-// creating a post
-router.post("/post", auth, postActions.CREATE);
-router.delete("/post", auth,isAdmin,postActions.DELETE);
 
 module.exports = router;

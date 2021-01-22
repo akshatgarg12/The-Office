@@ -77,7 +77,6 @@ const UserInfoCard = ({
             <h2>
               {firstName} {lastName} {isAdmin && <h6 style={{background:"blanchedalmond", padding:"1px 10px"}}>Admin</h6>}
             </h2>
-            
           </Card.Header>
           <Card.Description>
             Employee_id: <span className="highlight">{_id}</span>
