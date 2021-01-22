@@ -39,9 +39,7 @@ app.use(
 );
 app.set("trust proxy", 1);
 app.use(cookieParser());
-// app.use(helmet({
-//   contentSecurityPolicy:false
-// }))
+
 
 // api routes
 app.use(
@@ -55,7 +53,7 @@ app.use(
 app.use("/api", apiRoutes);
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("hello world from HR management App Backend");
 });
 
 app.listen(PORT, () => console.log(`Server started at ${PORT}`));
