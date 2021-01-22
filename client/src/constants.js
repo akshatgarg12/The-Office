@@ -1,4 +1,4 @@
-const development = false;
+const development = true;
 export const URL = {
   dev: "http://localhost:5000",
   prod: "https://human-resource-backend.herokuapp.com",

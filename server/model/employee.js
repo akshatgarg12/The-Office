@@ -70,13 +70,11 @@ const Request = require('./request')
 const KanbanBoard = require('./kanbanBoard')
 
 employeeSchema.pre('remove',async function(next){
-    // console.log(this.getFilter());
     const {_id} = this;
     try{
       const deleteAttendance = await Attendance.deleteMany({employee_id : _id})
       const deleteRequests = await Request.deleteMany({employee_id : _id})
       const deleteKanbans = await KanbanBoard.deleteMany({employee_id : _id})
-
       next();
     }catch(e){
       throw new Error(e.message)

@@ -1,53 +1,61 @@
-import {Header, Card, Container, Segment, Icon} from 'semantic-ui-react'
-import TodoListItem from '../../atoms/todoListItem'
-  
-const KanbanBoard = ({department}) => {
+import {Header, Container} from 'semantic-ui-react'
+import RefreshIcon from '../../atoms/refreshIcon'
+import {gql, useQuery} from '@apollo/client'
+import LoadingPage from '../../pages/loadingPage'
+import ErrorPage from '../../pages/errorPage'
+import ListContainer from '../ListContainer'
+import {TodoItemStatus} from '../../../constants'
+
+const KanbanBoard = ({section}) => {
   // gql request to todos of the department
+  // const 
+  const KANBAN_QUERY = gql`
+    query KanbanBoard($section:String!){
+      kanbanItems(section : $section){
+        _id
+        status
+        text
+        section
+        employee{
+          name
+          img
+        }
+      }
+    }
+  `;
+  const {loading, error, data, refetch} = useQuery(KANBAN_QUERY, {
+    variables:{
+      section
+    }
+  })
+  if(loading) return <LoadingPage />
+  if(error) return <ErrorPage />
+  if(data){
+    console.log(data);
+    const {kanbanItems} = data;
+    var TodoItems = kanbanItems.filter((item) => item.status === TodoItemStatus.TODO)
+    var DoingItems = kanbanItems.filter((item) => item.status === TodoItemStatus.DOING)
+    var DoneItems = kanbanItems.filter((item) => item.status === TodoItemStatus.DONE)
+  }
   return (
     <Container>
-        <Header as="h3" content={department} block />
-        <Segment >
-            <h4>Todo <Icon name="hourglass start" /></h4>
-            <Card.Group>
-            <TodoListItem 
-            _id={1}
-            text={"this is a todo"}
-            status={"Todo"}
-            employee={{
-              name:"akshat",
-              img:""
-            }}
-          />
-           </Card.Group>
-        </Segment>
-      <Segment>
-      <h4>Doing <Icon name="hourglass half" /></h4>
-      <Card.Group>
-          <TodoListItem 
-          _id={1}
-          text={"this is a todo"}
-          status={"Doing"}
-          employee={{
-            name:"akshat",
-            img:""
-          }}
+        <RefreshIcon refetch={refetch} />
+        <Header as="h3" content={section} block />
+        <ListContainer 
+            listItems = {TodoItems}
+            heading={"Todo"}
+            icon = {"hourglass start"}
         />
-      </Card.Group>
-      </Segment>
-      <Segment>
-      <h4>Done <Icon name="hourglass end" /></h4>
-      <Card.Group>
-          <TodoListItem 
-          _id={1}
-          text={"this is a todo"}
-          status={"Done"}
-          employee={{
-            name:"akshat",
-            img:""
-          }}
+        <ListContainer 
+            listItems = {DoingItems}
+            heading={"Doing"}
+            icon = {"hourglass half"}
         />
-      </Card.Group>
-      </Segment>
+        <ListContainer 
+            listItems = {DoneItems}
+            heading={"Done"}
+            icon = {"hourglass end"}
+        />
     </Container>
   )
 }

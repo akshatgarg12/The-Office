@@ -6,7 +6,7 @@ const KanbanPage = () => {
   return (
     <>
       <KanbanBoard
-        department={"Sales department"}
+        section={"Sales Department"}
        />
     </>
   );

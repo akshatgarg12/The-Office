@@ -1,4 +1,4 @@
-import { Card, Icon, Feed } from 'semantic-ui-react'
+import { Card, Icon ,Image } from 'semantic-ui-react'
 import {TodoItemStatus} from '../../../constants'
 import './style.css';
 
@@ -12,7 +12,10 @@ const TodoListItem = ({_id, text, status, employee}) => {
   return (
   <Card>
       <Card.Content>
-      <Feed.Label image={employee.img} content={employee.name} />
+      <div className="employee-kanban">
+        <Image avatar src={employee.img} />
+        <h5>{employee.name}</h5>
+      </div>
       </Card.Content>
       <Card.Content description={text} />
       <Card.Content extra className="buttons">
