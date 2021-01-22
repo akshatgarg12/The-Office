@@ -5,6 +5,7 @@ const attendanceActions = require("../controllers/attendance");
 const userActions = require("../controllers/auth");
 const requestActions = require("../controllers/requests");
 const postActions = require("../controllers/post");
+const kanbanBoardActions = require('../controllers/kanbanBoard');
 const auth = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
 
@@ -34,5 +35,11 @@ router.route('/post')
       .post(auth, postActions.CREATE)
       .delete(auth, postActions.DELETE)
 
+// kanban board and personal todoList
+router.route('/kanban')
+      .post(auth,kanbanBoardActions.CREATE)
+      .delete(auth, kanbanBoardActions.DELETE)
+      .patch(auth, kanbanBoardActions.UPDATE)
 
+      
 module.exports = router;
