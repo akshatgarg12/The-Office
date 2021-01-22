@@ -2,13 +2,14 @@ const KanbanBoard = require('../model/kanbanBoard')
 
 const CREATE = async (req, res) => {
   const {text,section,status} = req.body;
+  console.log(req.body)
   const employee_id = req.user._id;
   if(!text || !section){
     return res.status(400).send("Please fill all the fields")
   }
   try{
     const newItem = new KanbanBoard({
-      text, employee_id, status
+      text, employee_id, status, section
     })
     await newItem.save()
     console.log(newItem)

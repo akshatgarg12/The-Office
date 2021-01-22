@@ -12,6 +12,7 @@ const Employee = require("../model/employee");
 const Attendance = require("../model/attendance");
 const Request = require("../model/request");
 const Post = require("../model/post");
+const KanbanBoard = require("../model/kanbanBoard");
 
 const dateConverter = (time) => {
   let date_ob = new Date(time);
@@ -194,6 +195,33 @@ const PostType = new GraphQLObjectType({
   }),
 });
 
+// Kanban Board Types
+const KanbanItemType = new GraphQLObjectType({
+  name:'KanbanItem',
+  fields:() => ({
+    _id: {
+      type: GraphQLString,
+    },
+    text: {
+      type: GraphQLString,
+    },
+    employee: {
+      type: UserType,
+      async resolve(parent, _){
+        const { employee_id } = parent;
+        const employee = await Employee.findOne({ _id: employee_id });
+        return employee;
+      }
+    },
+    section: {
+      type:GraphQLString
+    },
+    status:{
+      type:GraphQLString
+    }
+  })
+})
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -246,6 +274,19 @@ const RootQuery = new GraphQLObjectType({
         return data;
       },
     },
+    kanbanItems:{
+      name:'Kanban',
+      type:GraphQLList(KanbanItemType),
+      args:{
+        section: {type:GraphQLNonNull(GraphQLString)},
+      },
+      async resolve(_, args){
+        const data = await KanbanBoard.find({ ...args }).sort({
+          createdAt:"descending",
+        })
+        return data;
+      }
+    }
   }),
 });
 

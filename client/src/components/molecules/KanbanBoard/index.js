@@ -1,6 +1,6 @@
 import {Header, Card, Container, Segment, Icon} from 'semantic-ui-react'
 import TodoListItem from '../../atoms/todoListItem'
-
+  
 const KanbanBoard = ({department}) => {
   // gql request to todos of the department
   return (
