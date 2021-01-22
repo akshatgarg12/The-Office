@@ -1,0 +1,55 @@
+# links 
+github: https://github.com/akshatgarg12/Stack-hack-2.0
+hackathon : https://www.hackerearth.com/challenges/hackathon/stackhack-20/
+frontend_deployed_url: https://stack-hack-2-0.vercel.app/
+backend_deployed_url: https://human-resource-backend.herokuapp.com/
+
+# credentials to login: (required because app is protected with authentication) => {
+  to login as admin : [
+    {
+      email : michael@dundermifflin.com,
+      password: Michael5
+    },
+    {
+      email: david@dundermifflin.com,
+      password: David7
+    }
+  ]
+  to login as regular employee: [
+     {
+      email : jim@dundermifflin.com,
+      password: Jim7
+    },
+    {
+      email: pam@dundermifflin.com,
+      password: Pam6
+    }
+  ]
+} 
+
+you can login as admin and create your own employee from the admin section and
+can login using the email you specified and the password as : first_name + size_of_last_name 
+// eg : Akshat Garg  => password = Akshat4
+        AKSHAT Garg => password = AKSHAT4
+        akshat Garg => password = akshat4
+        Michael Scott => password = Michael5
+
+        similarly you can find the password of all employee based on their name,
+        from the search page.
+
+# instructions for running it locally.
+
+1. to run client on local system : 
+  a. cd client
+  b. npm install
+  c. npm start
+
+2. to run server on local system:
+  a. cd server
+  b. npm install
+  c. npm run dev or node server.js
+
+3. to connect client to local running server:
+  a. go to the /client/src/constants
+  b. change dev = true;
+
