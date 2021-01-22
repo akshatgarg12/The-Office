@@ -1,0 +1,14 @@
+.buttons div{
+  display: inline;
+  margin: 5px;
+  cursor: pointer;
+}
+.employee-kanban h5{
+  display: inline;
+  margin: 5px 5px;
+}
+.employee-kanban{
+  display: flex;
+  margin: auto;
+  padding: 5px;
+}

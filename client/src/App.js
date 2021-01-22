@@ -9,6 +9,7 @@ import SearchPage from "./components/pages/searchPage";
 import HomePage from "./components/pages/homePage";
 import "react-calendar/dist/Calendar.css";
 import AboutPage from "./components/pages/aboutPage";
+import KanbanPage from "./components/pages/kanbanPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <ProtectedRoute path="/search" component={SearchPage} />
       <AdminRoute path="/admin" component={AdminPage} />
       <ProtectedRoute path="/users/:id" component={AboutPage} />
+      <ProtectedRoute path="/kanban" component={KanbanPage} />
       <Route component={() => <h1>404 Page not found</h1>} />
     </Switch>
   );
