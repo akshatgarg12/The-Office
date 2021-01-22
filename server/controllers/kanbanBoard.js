@@ -25,15 +25,16 @@ const DELETE = async (req, res) => {
   if(!_id){
     return res.status(400).send("please send _id of todo to delete")
   }
-  const employee_id = req.user._id;
+  // login changed to anyone can delete as its a public board
+  // const employee_id = req.user._id;
   try{
     const item = await KanbanBoard.findOne({_id})
-    if(item.employee_id.toString() === employee_id.toString()){
-      await item.remove()
-      return res.send("item successfully deleted")
-    }else{
-      return res.status(400).send("you don't have the authority to delete this")
-    }
+    // if(item.employee_id.toString() === employee_id.toString()){
+    await item.remove()
+    return res.send("item successfully deleted")
+    // }else{
+    //   return res.status(400).send("you don't have the authority to delete this")
+    // }
   }catch(e){
     console.log(e)
     return res.status(400).send(e.message);

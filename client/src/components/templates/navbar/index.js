@@ -11,9 +11,9 @@ const Navbar = () => {
   const mobileNav = useRef();
   var navLinks = ["Login"];
   if (state.user) {
-    navLinks = ["Discussion", "Search", "Dashboard"];
+    navLinks = ["Discussion", "Search", "Dashboard", "Kanban"];
     if (state.user.isAdmin) {
-      navLinks = ["Discussion", "Search", "Dashboard", "Admin"];
+      navLinks = ["Discussion", "Search", "Dashboard", "Admin","Kanban"];
     }
   }
   // const logoLink = state.user ? '/dashboard' : '/';

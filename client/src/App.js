@@ -21,7 +21,7 @@ const App = () => {
       <ProtectedRoute path="/search" component={SearchPage} />
       <AdminRoute path="/admin" component={AdminPage} />
       <ProtectedRoute path="/users/:id" component={AboutPage} />
-      <Route path="/kanban" component={KanbanPage} />
+      <ProtectedRoute path="/kanban" component={KanbanPage} />
       <Route component={() => <h1>404 Page not found</h1>} />
     </Switch>
   );

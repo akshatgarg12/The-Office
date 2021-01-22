@@ -1,14 +1,53 @@
+import { useState } from 'react';
 import { Card, Icon ,Image } from 'semantic-ui-react'
+import { REQUEST } from '../../../actions/http';
 import {TodoItemStatus} from '../../../constants'
 import './style.css';
 
-const TodoListItem = ({_id, text, status, employee}) => {
-  // const updateStatus = (status) => {
+const TodoListItemButton = ({onClick, name, loading, title}) => {
+  return  <div onClick={onClick}><Icon name={name} loading={loading} />{title}</div>
+}
 
-  // }
-  // const deleteItem = () => {
-
-  // }
+const TodoListItem = ({_id, text, status, employee, refetch}) => {
+  const [loading, setLoading] = useState(false)
+  const updateStatus = async (status) => {
+    try{
+      const response = await REQUEST({
+        path:'/api/kanban',
+        method:"PATCH",
+        data:{
+          _id,
+          status
+        },
+        setLoading
+      })
+      console.log(response)
+    }catch(e){
+      console.log(e.message)
+    }finally{
+      refetch && refetch()
+      return;
+    }
+  }
+  const deleteItem = async (e) => {
+    e.preventDefault()
+    try{
+      const response = await REQUEST({
+        path:'/api/kanban',
+        method:"DELETE",
+        data:{
+          _id
+        },
+        setLoading
+      })
+      console.log(response)
+    }catch(e){
+      console.log(e.message)
+    }finally{
+      refetch && refetch()
+      return;
+    }
+  }
   return (
   <Card>
       <Card.Content>
@@ -22,23 +61,76 @@ const TodoListItem = ({_id, text, status, employee}) => {
       {
         status === TodoItemStatus.DONE ? 
         <>
-          <div><Icon name='hourglass start' />Todo</div>
-          <div><Icon name='hourglass half' />Doing</div>
+          <TodoListItemButton 
+            onClick={() => {updateStatus(TodoItemStatus.TODO)}}
+            name="hourglass start"
+            loading = {loading}
+            title = "Todo"
+          />
+          <TodoListItemButton 
+          onClick={() => {updateStatus(TodoItemStatus.DOING)}}
+          name="hourglass half"
+          loading = {loading}
+          title = "Doing"
+        />
         </> : 
         status === TodoItemStatus.DOING ? 
         <>
-          <div><Icon name='hourglass start' />Todo</div>
-          <div><Icon name='hourglass end' />Done</div>
+          <TodoListItemButton 
+            onClick={() => {updateStatus(TodoItemStatus.TODO)}}
+            name="hourglass start"
+            loading = {loading}
+            title = "Todo"
+          />
+          <TodoListItemButton 
+            onClick={() => {updateStatus(TodoItemStatus.DONE)}}
+            name="hourglass end"
+            loading = {loading}
+            title = "Done"
+          />
         </> :
         <>
-          <div><Icon name='hourglass half' />Doing</div>
-          <div><Icon name='hourglass end' />Done</div>
+          <TodoListItemButton 
+            onClick={() => {updateStatus(TodoItemStatus.DOING)}}
+            name="hourglass half"
+            loading = {loading}
+            title = "Doing"
+          />
+          <TodoListItemButton 
+            onClick={() => {updateStatus(TodoItemStatus.DONE)}}
+            name="hourglass end"
+            loading = {loading}
+            title = "Done"
+          />
         </> 
       }
-      <div><Icon name='trash'/>Delete</div>
+        <TodoListItemButton 
+          onClick={deleteItem}
+          name="trash"
+          loading = {loading}
+          title = {"Delete"}
+        />
+        {/* <TodoListItemButton 
+          onClick={() => {updateStatus(TodoItemStatus.DOING)}}
+          name="hourglass half"
+          loading = {loading}
+          title = "Doing"
+        />
+         <TodoListItemButton 
+          onClick={() => {updateStatus(TodoItemStatus.DONE)}}
+          name="hourglass end"
+          loading = {loading}
+          title = "Done"
+        />
+        <TodoListItemButton 
+          onClick={() => {updateStatus(TodoItemStatus.TODO)}}
+          name="hourglass start"
+          loading = {loading}
+          title = "Todo"
+        /> */}
       </Card.Content>
   </Card>
   );
 }
- 
+
 export default TodoListItem;
