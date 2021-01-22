@@ -1,15 +1,35 @@
 import KanbanBoard from "../molecules/KanbanBoard"
 import { Container } from 'semantic-ui-react'
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContextProvider";
 
 const KanbanPage = () => {
-  // if admin show all the departments
-  // else only show the list of particular department
+  const {state} = useContext(UserContext)
+
   return (
     <Container>
-
       <KanbanBoard
-        section={"Sales Department"}
+        section={state?.user?.department}
       />
+      <div style={{height:"50px"}}></div>
+      {
+        state?.user?.isAdmin ? 
+        <>
+          <KanbanBoard
+            section={"Sales Department"}
+            showForm = {false}
+            showButtons = {false}
+          />
+          <div style={{height:"50px"}}></div>
+          <KanbanBoard
+            section={"Finance Department"}
+            showForm = {false}
+            showButtons = {false}
+
+          />
+        </> : null
+      } 
+      
       
     </Container>
   );

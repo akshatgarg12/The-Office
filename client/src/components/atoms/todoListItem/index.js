@@ -8,7 +8,7 @@ const TodoListItemButton = ({onClick, name, loading, title}) => {
   return  <div onClick={onClick}><Icon name={name} loading={loading} />{title}</div>
 }
 
-const TodoListItem = ({_id, text, status, employee, refetch}) => {
+const TodoListItem = ({_id, text, status, employee, refetch, showButtons}) => {
   const [loading, setLoading] = useState(false)
   const updateStatus = async (status) => {
     try{
@@ -58,7 +58,9 @@ const TodoListItem = ({_id, text, status, employee, refetch}) => {
       </Card.Content>
       <Card.Content description={text} />
       <Card.Content extra className="buttons">
+      
       {
+        showButtons ? 
         status === TodoItemStatus.DONE ? 
         <>
           <TodoListItemButton 
@@ -102,32 +104,14 @@ const TodoListItem = ({_id, text, status, employee, refetch}) => {
             loading = {loading}
             title = "Done"
           />
-        </> 
+        </> : null
       }
-        <TodoListItemButton 
+        { showButtons && <TodoListItemButton 
           onClick={deleteItem}
           name="trash"
           loading = {loading}
           title = {"Delete"}
-        />
-        {/* <TodoListItemButton 
-          onClick={() => {updateStatus(TodoItemStatus.DOING)}}
-          name="hourglass half"
-          loading = {loading}
-          title = "Doing"
-        />
-         <TodoListItemButton 
-          onClick={() => {updateStatus(TodoItemStatus.DONE)}}
-          name="hourglass end"
-          loading = {loading}
-          title = "Done"
-        />
-        <TodoListItemButton 
-          onClick={() => {updateStatus(TodoItemStatus.TODO)}}
-          name="hourglass start"
-          loading = {loading}
-          title = "Todo"
-        /> */}
+        />}
       </Card.Content>
   </Card>
   );

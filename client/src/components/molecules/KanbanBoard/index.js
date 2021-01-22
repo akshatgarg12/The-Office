@@ -9,7 +9,7 @@ import {TodoItemStatus} from '../../../constants'
 import ListItemForm from '../../atoms/listItemForm'
 import { UserContext } from '../../../context/UserContextProvider'
 
-const KanbanBoard = ({section, showForm=true}) => {
+const KanbanBoard = ({section, showForm=true, showButtons = true}) => {
   // gql request to todos of the department
   const {state} = useContext(UserContext)
   const KANBAN_QUERY = gql`
@@ -34,7 +34,7 @@ const KanbanBoard = ({section, showForm=true}) => {
   if(loading) return <LoadingPage />
   if(error) return <ErrorPage />
   if(data){
-    console.log(data);
+    // console.log(data);
     const {kanbanItems} = data;
     var TodoItems = kanbanItems.filter((item) => item.status === TodoItemStatus.TODO)
     var DoingItems = kanbanItems.filter((item) => item.status === TodoItemStatus.DOING)
@@ -42,7 +42,7 @@ const KanbanBoard = ({section, showForm=true}) => {
   }
   return (
     <Container>
-        <RefreshIcon refetch={refetch} />
+        {showButtons && <RefreshIcon refetch={refetch} />}
         {showForm ? <ListItemForm section = {state?.user?.department} refetch={refetch} /> : null}
         <Header as="h3" content={section} block />
         <ListContainer 
@@ -50,18 +50,21 @@ const KanbanBoard = ({section, showForm=true}) => {
             heading={"Todo"}
             icon = {"hourglass start"}
             refetch = {refetch}
+            showButtons = {showButtons}
         />
         <ListContainer 
             listItems = {DoingItems}
             heading={"Doing"}
             icon = {"hourglass half"}
             refetch = {refetch}
+            showButtons = {showButtons}
         />
         <ListContainer 
             listItems = {DoneItems}
             heading={"Done"}
             icon = {"hourglass end"}
             refetch = {refetch}
+            showButtons = {showButtons}
         />
     </Container>
   )

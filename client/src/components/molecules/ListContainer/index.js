@@ -1,7 +1,7 @@
 import {Segment, Icon, Card} from 'semantic-ui-react'
 import TodoListItem from '../../atoms/todoListItem'
 
-const ListContainer = ({listItems, heading, icon, refetch}) => {
+const ListContainer = ({listItems, heading, icon, refetch, showButtons}) => {
   return (
     <Segment >
         <h4>{heading} <Icon name={icon} /></h4>
@@ -15,6 +15,7 @@ const ListContainer = ({listItems, heading, icon, refetch}) => {
                       status={status}
                       employee={employee}
                       refetch = {refetch}
+                      showButtons = {showButtons}
                    />
           })
         }

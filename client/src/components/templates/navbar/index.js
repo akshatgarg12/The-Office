@@ -5,15 +5,37 @@ import { logout } from "../../../actions/logout";
 import { Link } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 
+const loggedInLinks = [
+  {
+    link:"Discussion",
+    icon:"feed"
+  },
+  {
+    link:"Search",
+    icon:"search"
+  },
+  {
+    link:"Dashboard",
+    icon:"user outline"
+  },
+  {
+    link:"Kanban",
+    icon:"clipboard list"
+  },
+]
+
 const Navbar = () => {
   const { state, dispatch } = useContext(UserContext);
   const [icon, setIcon] = useState("envelope");
   const mobileNav = useRef();
-  var navLinks = ["Login"];
+  var navLinks = [{
+    link:"Login",
+    icon:"user circle"
+  }];
   if (state.user) {
-    navLinks = ["Discussion", "Search", "Dashboard", "Kanban"];
+    navLinks = loggedInLinks;
     if (state.user.isAdmin) {
-      navLinks = ["Discussion", "Search", "Dashboard", "Admin","Kanban"];
+      navLinks = [...loggedInLinks, {link:"Admin", icon:"user plus"}];
     }
   }
   // const logoLink = state.user ? '/dashboard' : '/';
@@ -32,10 +54,10 @@ const Navbar = () => {
       {navLinks.length > 1 ? (
         <div>
           <ul className="nav-links">
-            {navLinks.map((link, idx) => {
+            {navLinks.map(({link, icon}, idx) => {
               return (
                 <Link className="link" to={`/${link.toLowerCase()}`} key={idx}>
-                  <li>{link}</li>
+                  <li>{link} <Icon name={icon} /></li>
                 </Link>
               );
             })}
@@ -45,14 +67,14 @@ const Navbar = () => {
           <div className="nav-burger" onClick={hideLinks}>
             <Icon name={icon} />
             <ul className="nav-burger-links hidden" ref={mobileNav}>
-              {navLinks.map((link, idx) => {
+              {navLinks.map(({link, icon}, idx) => {
                 return (
                   <Link
                     className="link"
                     to={`/${link.toLowerCase()}`}
                     key={idx}
                   >
-                    <li>{link}</li>
+                    <li>{link} <Icon name={icon} /></li> 
                   </Link>
                 );
               })}
@@ -65,7 +87,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        navLinks.map((link, idx) => {
+        navLinks.map(({link, icon}, idx) => {
           console.log(link);
           return (
             <Link
@@ -73,7 +95,7 @@ const Navbar = () => {
               to={`/${link.toLowerCase()}`}
               key={idx}
             >
-              <li>{link}</li>
+              <li>{link} <Icon name={icon} /></li>
             </Link>
           );
         })

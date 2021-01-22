@@ -39,7 +39,7 @@ const ListItemForm = ({section, refetch}) => {
       <Form>
         <Form.Field>
           <label>Text</label>
-          <input placeholder='Text of List Item...' value={text}
+          <input placeholder={`Text of List Item for ${section}...`} value={text}
             onChange={(e) => setText(e.target.value)}
           />
         </Form.Field>
