@@ -10,3 +10,9 @@ export const USER_REQUESTS_TYPE = {
   PAYROLL: "payroll",
   LEAVE: "leave",
 };
+
+export const TodoItemStatus = {
+  TODO : "Todo",
+  DOING: "Doing",
+  DONE: "Done"
+}

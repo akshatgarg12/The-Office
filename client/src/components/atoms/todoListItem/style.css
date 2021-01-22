@@ -1,0 +1,5 @@
+.buttons div{
+  display: inline;
+  margin: 5px;
+  cursor: pointer;
+}
