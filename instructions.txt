@@ -3,6 +3,7 @@ github: https://github.com/akshatgarg12/Stack-hack-2.0
 hackathon : https://www.hackerearth.com/challenges/hackathon/stackhack-20/
 frontend_deployed_url: https://stack-hack-2-0.vercel.app/
 backend_deployed_url: https://human-resource-backend.herokuapp.com/
+youtube: https://youtu.be/q0KDqRb581o
 
 # credentials to login: (required because app is protected with authentication) => {
   to login as admin : [
@@ -28,7 +29,9 @@ backend_deployed_url: https://human-resource-backend.herokuapp.com/
 } 
 
 you can login as admin and create your own employee from the admin section and
-can login using the email you specified and the password as : first_name + size_of_last_name 
+can login using the email you specified and the password as 
+mind the caps of name which you specify during form creation!
+: const password = firstName + String(lastName.length);
 // eg : Akshat Garg  => password = Akshat4
         AKSHAT Garg => password = AKSHAT4
         akshat Garg => password = akshat4
