@@ -127,4 +127,4 @@ Admins also get the option to delete the employees from the search page.
 <p>Frontend is deployed to Vercel</p>
 <p>Database service : MongoDB atlas</p>
 
-video : <a href:"https://www.youtube.com/watch?v=q0KDqRb581o&feature=youtu.be">Youtube</a>
+video : <a href="https://www.youtube.com/watch?v=q0KDqRb581o&feature=youtu.be">Youtube</a>
