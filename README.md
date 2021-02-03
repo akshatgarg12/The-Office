@@ -1,4 +1,4 @@
-<h1 text-align = "center">💼THE OFFICE : HUMAN RESOURCE MANAGEMENT APP💼</h1>
+<h1 text-align = "center">THE OFFICE : HUMAN RESOURCE MANAGEMENT APP💼</h1>
 
 <p>
   A solution provided for a fullstack web development hackathon <a href="https://www.hackerearth.com/challenges/hackathon/stackhack-20/">Stack-hack 2.0</a> 
