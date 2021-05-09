@@ -64,6 +64,18 @@ const LoginForm = () => {
           />
         ) : null}
       </Segment>
+      {/* instructions for testing app */}
+      <Segment>
+        <h2 style={{textDecoration:"underline"}}>To test the application</h2>
+        <br/>
+        <h3>As a regular employee</h3>
+        <h4>email : jim@dundermifflin.com</h4>
+        <h4>password : Jim7</h4>
+        <br/>
+        <h3>As a admin</h3>
+        <h4>email : michael@dundermifflin.com</h4>
+        <h4>password : Michael5</h4>
+      </Segment>
     </Container>
   );
 };
